@@ -28,13 +28,13 @@ const Hero: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-dark text-white pt-32 pb-20"
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white text-dark pt-32 pb-20"
       onMouseMove={handleMouseMove}
     >
       {/* BG Effects */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-900/20 rounded-full blur-[100px] pointer-events-none animate-pulse"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-violet-900/20 rounded-full blur-[100px] pointer-events-none animate-pulse delay-1000"></div>
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5 pointer-events-none"></div>
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-100/50 rounded-full blur-[100px] pointer-events-none animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-violet-100/50 rounded-full blur-[100px] pointer-events-none animate-pulse delay-1000"></div>
 
       <motion.div
         style={{ y, opacity }}
@@ -47,18 +47,18 @@ const Hero: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
           >
-            <h2 className="text-xl md:text-2xl font-medium text-gray-400 mb-4">
+            <h2 className="text-xl md:text-2xl font-medium text-gray-700 mb-4">
               Hi, I'm Tewodros Habtamu
             </h2>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-tight tracking-tighter mb-8">
               Web Developer <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">
                 & Data Scientist
               </span>
             </h1>
 
-            <p className="max-w-md text-gray-400 text-lg leading-relaxed mb-6">
+            <p className="max-w-md text-gray-600 text-lg leading-relaxed mb-6">
               My expertise lies in transforming design concepts into interactive web applications that leave a lasting impression. I believe in the power of aesthetics and usability.
             </p>
 
@@ -72,8 +72,8 @@ const Hero: React.FC = () => {
             </a>
 
             <div className="flex items-center gap-4 mt-4">
-              <div className="h-[1px] w-12 bg-gray-600"></div>
-              <span className="text-sm uppercase tracking-widest text-gray-500">
+              <div className="h-[1px] w-12 bg-gray-400"></div>
+              <span className="text-sm uppercase tracking-widest text-gray-600">
                 Scroll Down
               </span>
             </div>
@@ -90,19 +90,19 @@ const Hero: React.FC = () => {
               transformStyle: 'preserve-3d'
             }}
           >
-            <div className="absolute inset-0 rounded-2xl overflow-hidden border border-white/10 shadow-2xl transform translate-z-0 bg-stone-900">
+            <div className="absolute inset-0 rounded-2xl overflow-hidden border border-gray-200 shadow-xl transform translate-z-0 bg-gray-100">
               <img
                 src="/images/profile.png"
                 alt="Tewodros Habtamu"
                 className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-500 grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60"></div>
+              <div className="absolute inset-0 bg-black/5 opacity-60"></div>
             </div>
 
-            <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-blue-600/20 backdrop-blur-xl rounded-full transform translate-z-[30px] border border-white/10 animate-pulse"></div>
-            <div className="absolute -top-6 -left-6 w-32 h-32 bg-purple-600/10 backdrop-blur-xl rounded-full transform translate-z-[20px] border border-white/5"></div>
+            <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-blue-200/50 backdrop-blur-xl rounded-full transform translate-z-[30px] border border-gray-200 animate-pulse"></div>
+            <div className="absolute -top-6 -left-6 w-32 h-32 bg-purple-200/40 backdrop-blur-xl rounded-full transform translate-z-[20px] border border-gray-100"></div>
 
-            <div className="absolute inset-0 bg-blue-500 blur-[80px] opacity-20 -z-10 transform translate-z-[-50px]"></div>
+            <div className="absolute inset-0 bg-blue-100 blur-[80px] opacity-20 -z-10 transform translate-z-[-50px]"></div>
           </div>
         </div>
       </motion.div>
