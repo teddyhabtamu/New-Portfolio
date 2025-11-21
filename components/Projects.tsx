@@ -12,7 +12,7 @@ const projects: Project[] = [
     tags: ["#react", "#tailwind"],
     link: "https://github.com/teddyhabtamu/Brainwave",
     live: "https://brainwave-six-gamma.vercel.app/",
-    image: "/components/brain.png"
+    image: "/images/brain.png"
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const projects: Project[] = [
     tags: ["#react", "#tailwind", "#javascript"],
     link: "https://github.com/teddyhabtamu/Nike-Shoes",
     live: "https://nike-shoes-steel.vercel.app/",
-    image: "/components/nike.png"
+    image: "/images/nike.png"
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const projects: Project[] = [
     tags: ["#react", "#nodejs", "#mongodb", "#express"],
     link: "https://github.com/teddyhabtamu/Fana-Digital-Library",
     live: "https://fana-digital-library-ojng.vercel.app/",
-    image: "/components/fana.png"
+    image: "/images/fana.png"
   },
   {
     id: 4,
@@ -42,7 +42,7 @@ const projects: Project[] = [
     tags: ["#react", "#redux", "#tailwind", "#SQL"],
     link: "https://github.com/teddyhabtamu/PeakPulse-Fitness-Tracker-",
     live: "https://peak-pulse-fitness-tracker-kb1c.vercel.app/",
-    image: "/components/fit.png"
+    image: "/images/fit.png"
   },
   {
     id: 5,
@@ -52,7 +52,7 @@ const projects: Project[] = [
     tags: ["#react", "#css"],
     link: "https://github.com/teddyhabtamu/Meme-Generator-Web-App",
     live: "https://meme-generator-web-app-phi.vercel.app/",
-    image: "/components/meme.png"
+    image: "/images/meme.png"
   }
 ];
 

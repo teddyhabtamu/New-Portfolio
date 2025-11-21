@@ -72,7 +72,7 @@ out/
 .Spotlight-V100
 .Trashes
 ehthumbs.db
-Thumbs.db
+# Thumbs.db
 
 # Windows system files
 desktop.ini

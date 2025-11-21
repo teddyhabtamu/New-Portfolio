@@ -92,7 +92,7 @@ const Hero: React.FC = () => {
           >
             <div className="absolute inset-0 rounded-2xl overflow-hidden border border-white/10 shadow-2xl transform translate-z-0 bg-stone-900">
               <img
-                src="/components/profile.png"
+                src="/images/profile.png"
                 alt="Tewodros Habtamu"
                 className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-500 grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100"
               />

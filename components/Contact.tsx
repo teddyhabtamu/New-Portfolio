@@ -51,7 +51,7 @@ const Contact: React.FC = () => {
           <div className="w-full md:w-1/3 space-y-8">
              <div className="relative w-20 h-20 rounded-full bg-blue-600/20 flex items-center justify-center mb-8 overflow-hidden">
                <img 
-                 src="/components/profile.png" 
+                 src="/images/profile.png" 
                  alt="Avatar" 
                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                />
