@@ -6,6 +6,16 @@ import { Project } from '../types';
 const projects: Project[] = [
   {
     id: 1,
+    title: "Altech Valve Management System",
+    subtitle: "Amplitude | Valve Management Web App",
+    description: "A front-end project where I worked on building responsive UI screens and improving the overall user experience using React and Tailwind.",
+    tags: ["#react", "#tailwind", "#frontend"],
+    link: "https://github.com/amplitudeventures/avms-frontend",
+    live: "http://16.16.143.17/login",
+    image: "/images/altech.png"
+  },
+  {
+    id: 2,
     title: "Brainwave",
     subtitle: "AI Landing Page",
     description: "A front-end project where I contributed to building interactive user interfaces using React.js.",
@@ -15,7 +25,7 @@ const projects: Project[] = [
     image: "/images/brain.png"
   },
   {
-    id: 2,
+    id: 3,
     title: "Nike Branding",
     subtitle: "E-commerce Concept",
     description: "A branding project for Nike, focusing on creating a visually compelling and responsive website design.",
@@ -25,7 +35,7 @@ const projects: Project[] = [
     image: "/images/nike.png"
   },
   {
-    id: 3,
+    id: 4,
     title: "Fana Digital Library",
     subtitle: "Archive System",
     description: "Developed and deployed a digital library system for Fana Broadcasting Corporation, digitizing 100+ books.",
@@ -35,7 +45,7 @@ const projects: Project[] = [
     image: "/images/fana.png"
   },
   {
-    id: 4,
+    id: 5,
     title: "PeakPulse Fitness",
     subtitle: "Health Tracker",
     description: "A fitness tracking app that allows users to log and track workout activities and set goals.",
@@ -45,7 +55,7 @@ const projects: Project[] = [
     image: "/images/fit.png"
   },
   {
-    id: 5,
+    id: 6,
     title: "Meme Generator",
     subtitle: "Interactive App",
     description: "A fun web app that allows users to create and share custom memes by uploading images and adding text.",
