@@ -2,99 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="public/images/letter-t.png" />
+    <link rel="icon" type="image/svg+xml" href="/images/letter-t.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tewodros Habtamu | Web Developer & Data Scientist</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@200;300;400;600;800&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              display: ['Manrope', 'sans-serif'],
-            },
-            colors: {
-              accent: '#4F46E5', // Indigo
-              dark: '#0C0C0C',
-              secondary: '#1C1C1C',
-            },
-            backgroundImage: {
-              'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-            }
-          }
-        }
-      }
-    </script>
-    <style>
-      /* Lenis Recommended CSS */
-      html.lenis, html.lenis body {
-        height: auto;
-      }
-      
-      .lenis.lenis-smooth {
-        scroll-behavior: auto !important;
-      }
-      
-      .lenis.lenis-smooth [data-lenis-prevent] {
-        overscroll-behavior: contain;
-      }
-      
-      .lenis.lenis-stopped {
-        overflow: hidden;
-      }
-      
-      .lenis.lenis-scrolling iframe {
-        pointer-events: none;
-      }
-
-      html, body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        min-height: 100%;
-        background-color: #0C0C0C;
-        color: #EDEDED;
-        overflow-x: hidden;
-        /* Ensure vertical scroll is available */
-        overflow-y: auto; 
-      }
-
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 10px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0C0C0C;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #333;
-        border-radius: 5px;
-        border: 2px solid #0C0C0C;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-      }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24",
-    "@studio-freight/lenis": "https://aistudiocdn.com/@studio-freight/lenis@^1.0.42"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
+  </head>
   <body>
     <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
+    <script type="module" src="/index.tsx"></script>
+  </body>
 </html>

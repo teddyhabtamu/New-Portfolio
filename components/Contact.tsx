@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, MapPin } from 'lucide-react';
-// import emailjs from '@emailjs/browser';
+import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -24,7 +24,7 @@ const Contact: React.FC = () => {
 
     try {
       await emailjs.send(
-        'service_ox4h4v4',
+        'service_7htvmpg',
         'template_7kgwbbw',
         {
           fullName: formData.fullName,
@@ -49,7 +49,8 @@ const Contact: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-16">
           
           <div className="w-full md:w-1/3 space-y-8">
-             <div className="relative w-20 h-20 rounded-full bg-blue-600/20 flex items-center justify-center mb-8 overflow-hidden">
+             {/* 1. UPDATED: Avatar background to orange-600/20 */}
+             <div className="relative w-20 h-20 rounded-full bg-orange-600/20 flex items-center justify-center mb-8 overflow-hidden">
                <img 
                  src="/images/profile.png" 
                  alt="Avatar" 
@@ -81,7 +82,8 @@ const Contact: React.FC = () => {
                      placeholder="What's your good name?" 
                      value={formData.fullName}
                      onChange={handleChange}
-                     className="w-full bg-transparent border-b border-gray-700 py-4 text-xl focus:outline-none focus:border-blue-500 transition-colors placeholder:text-gray-600"
+                     // 2. UPDATED: Focus border color to orange-500
+                     className="w-full bg-transparent border-b border-gray-700 py-4 text-xl focus:outline-none focus:border-orange-500 transition-colors placeholder:text-gray-600"
                    />
                 </div>
 
@@ -94,7 +96,8 @@ const Contact: React.FC = () => {
                      placeholder="What's your email address?" 
                      value={formData.email}
                      onChange={handleChange}
-                     className="w-full bg-transparent border-b border-gray-700 py-4 text-xl focus:outline-none focus:border-blue-500 transition-colors placeholder:text-gray-600"
+                     // 2. UPDATED: Focus border color to orange-500
+                     className="w-full bg-transparent border-b border-gray-700 py-4 text-xl focus:outline-none focus:border-orange-500 transition-colors placeholder:text-gray-600"
                    />
                 </div>
 
@@ -107,7 +110,8 @@ const Contact: React.FC = () => {
                      placeholder="What you want to say?" 
                      value={formData.message}
                      onChange={handleChange}
-                     className="w-full bg-transparent border-b border-gray-700 py-4 text-xl focus:outline-none focus:border-blue-500 transition-colors placeholder:text-gray-600 resize-none"
+                     // 2. UPDATED: Focus border color to orange-500
+                     className="w-full bg-transparent border-b border-gray-700 py-4 text-xl focus:outline-none focus:border-orange-500 transition-colors placeholder:text-gray-600 resize-none"
                    />
                 </div>
 
@@ -127,7 +131,8 @@ const Contact: React.FC = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   disabled={loading}
-                  className="w-full md:w-auto bg-white text-black px-12 py-6 rounded-full font-bold text-lg flex items-center justify-center gap-2 hover:bg-blue-500 hover:text-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  // 3. UPDATED: Submit button hover to orange-500
+                  className="w-full md:w-auto bg-white text-black px-12 py-6 rounded-full font-bold text-lg flex items-center justify-center gap-2 hover:bg-orange-500 hover:text-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? 'Sending...' : 'Send Message'} <Send size={20} />
                 </motion.button>

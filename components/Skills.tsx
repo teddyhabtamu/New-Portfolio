@@ -25,10 +25,16 @@ const Skills: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
-                  className="p-6 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-center hover:border-blue-500/50 transition-colors cursor-default"
+                  // 1. UPDATED: Background hover tint to orange (R:249 G:115 B:22)
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(249, 115, 22, 0.1)" }}
+                  // 2. UPDATED: Border hover to orange
+                  // 3. ADDED: 'group' class to control the child text color
+                  className="group p-6 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-center hover:border-orange-500/50 transition-colors cursor-default"
                 >
-                  <span className="font-medium text-gray-200">{skill}</span>
+                  {/* 4. ADDED: group-hover transition for text */}
+                  <span className="font-medium text-gray-200 group-hover:text-orange-200 transition-colors">
+                    {skill}
+                  </span>
                 </motion.div>
               ))}
             </div>

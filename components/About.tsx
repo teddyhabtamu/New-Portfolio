@@ -33,8 +33,9 @@ const About: React.FC = () => {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
+          {/* UPDATED: Dot color to bg-orange-500 */}
           <motion.h2 variants={itemVariants} className="text-4xl md:text-6xl font-display font-bold mb-16 flex items-end gap-4">
-            About Me <span className="w-3 h-3 rounded-full bg-blue-500 mb-2 animate-pulse"></span>
+            About Me <span className="w-3 h-3 rounded-full bg-orange-500 mb-2 animate-pulse"></span>
           </motion.h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -42,7 +43,8 @@ const About: React.FC = () => {
             {/* Main Intro */}
             <motion.div variants={itemVariants} className="lg:col-span-8">
               <p className="text-2xl md:text-4xl leading-tight font-light text-gray-200 mb-12">
-                I'm a frontend developer who loves building clean and easy-to-use websites. I work with <span className="text-blue-400">React</span>, <span className="text-blue-400">Tailwind</span> and <span className="text-blue-400">Node</span> to turn ideas into real websites.
+                {/* UPDATED: Text colors to text-orange-400 */}
+                I'm a frontend developer who loves building clean and easy-to-use websites. I work with <span className="text-orange-400">React</span>, <span className="text-orange-400">Tailwind</span> and <span className="text-orange-400">Node</span> to turn ideas into real websites.
               </p>
             </motion.div>
 

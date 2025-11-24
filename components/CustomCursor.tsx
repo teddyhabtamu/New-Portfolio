@@ -41,7 +41,8 @@ const CustomCursor: React.FC = () => {
         target.closest("textarea") ||
         target.classList.contains("cursor-pointer");
 
-      scale.set(isInteractive ? 3.2 : 1);
+      // Optional: Increase the scale slightly when using the difference blend for better contrast
+      scale.set(isInteractive ? 3.5 : 1); 
     };
 
     window.addEventListener("pointermove", handleMove);
@@ -55,7 +56,9 @@ const CustomCursor: React.FC = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] mix-blend-difference bg-white hidden md:block"
+      // REVERTED: Using mix-blend-difference for guaranteed visibility on both light and dark backgrounds
+      // COLOR: Changed to a subtle dark gray (bg-gray-800) instead of pure white/orange
+      className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] mix-blend-difference bg-gray-800 hidden md:block"
       style={{
         x: smoothX,
         y: smoothY,

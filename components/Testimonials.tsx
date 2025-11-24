@@ -46,12 +46,14 @@ const Testimonials: React.FC = () => {
               viewport={{ once: true }}
               className="bg-white/5 p-8 md:p-12 rounded-2xl relative border border-white/5 hover:border-white/10 transition-colors"
             >
-              <Quote className="text-blue-500 mb-6 opacity-50" size={40} />
+              {/* 1. UPDATED: Quote icon color to orange-500 */}
+              <Quote className="text-orange-500 mb-6 opacity-50" size={40} />
               <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-8 italic">
                 "{item.quote}"
               </p>
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-sm font-bold">
+                {/* 2. UPDATED: Author bubble gradient to orange/red for a warm brand look */}
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-sm font-bold">
                   {item.author.charAt(0)}
                 </div>
                 <div>

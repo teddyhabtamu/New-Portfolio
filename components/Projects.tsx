@@ -4,70 +4,81 @@ import { ArrowUpRight, Github } from 'lucide-react';
 import { Project } from '../types';
 
 const projects: Project[] = [
-  {
-    id: 1,
-    title: "Altech Valve Management System",
-    subtitle: "Amplitude | Valve Management Web App",
-    description: "A front-end project where I worked on building responsive UI screens and improving the overall user experience using React and Tailwind.",
-    tags: ["#react", "#tailwind", "#frontend"],
-    link: "https://github.com/amplitudeventures/avms-frontend",
-    live: "http://16.16.143.17/login",
-    image: "/images/altech.png"
-  },
-  {
-    id: 2,
-    title: "Brainwave",
-    subtitle: "AI Landing Page",
-    description: "A front-end project where I contributed to building interactive user interfaces using React.js.",
-    tags: ["#react", "#tailwind"],
-    link: "https://github.com/teddyhabtamu/Brainwave",
-    live: "https://brainwave-six-gamma.vercel.app/",
-    image: "/images/brain.png"
-  },
-  {
-    id: 3,
-    title: "Nike Branding",
-    subtitle: "E-commerce Concept",
-    description: "A branding project for Nike, focusing on creating a visually compelling and responsive website design.",
-    tags: ["#react", "#tailwind", "#javascript"],
-    link: "https://github.com/teddyhabtamu/Nike-Shoes",
-    live: "https://nike-shoes-steel.vercel.app/",
-    image: "/images/nike.png"
-  },
-  {
-    id: 4,
-    title: "Fana Digital Library",
-    subtitle: "Archive System",
-    description: "Developed and deployed a digital library system for Fana Broadcasting Corporation, digitizing 100+ books.",
-    tags: ["#react", "#nodejs", "#mongodb", "#express"],
-    link: "https://github.com/teddyhabtamu/Fana-Digital-Library",
-    live: "https://fana-digital-library-ojng.vercel.app/",
-    image: "/images/fana.png"
-  },
-  {
-    id: 5,
-    title: "PeakPulse Fitness",
-    subtitle: "Health Tracker",
-    description: "A fitness tracking app that allows users to log and track workout activities and set goals.",
-    tags: ["#react", "#redux", "#tailwind", "#SQL"],
-    link: "https://github.com/teddyhabtamu/PeakPulse-Fitness-Tracker-",
-    live: "https://peak-pulse-fitness-tracker-kb1c.vercel.app/",
-    image: "/images/fit.png"
-  },
-  {
-    id: 6,
-    title: "Meme Generator",
-    subtitle: "Interactive App",
-    description: "A fun web app that allows users to create and share custom memes by uploading images and adding text.",
-    tags: ["#react", "#css"],
-    link: "https://github.com/teddyhabtamu/Meme-Generator-Web-App",
-    live: "https://meme-generator-web-app-phi.vercel.app/",
-    image: "/images/meme.png"
-  }
+  {
+    id: 1,
+    title: "Altech Valve Management System",
+    subtitle: "Amplitude | Valve Management Web App",
+    description: "A front-end project where I worked on building responsive UI screens and improving the overall user experience using React and Tailwind.",
+    tags: ["#react", "#tailwind", "#frontend"],
+    link: "https://github.com/amplitudeventures/avms-frontend",
+    live: "http://16.16.143.17/login",
+    image: "/images/altech.png"
+  },
+  {
+    id: 2,
+    title: "Brainwave",
+    subtitle: "AI Landing Page",
+    description: "A front-end project where I contributed to building interactive user interfaces using React.js.",
+    tags: ["#react", "#tailwind"],
+    link: "https://github.com/teddyhabtamu/Brainwave",
+    live: "https://brainwave-six-gamma.vercel.app/",
+    image: "/images/brain.png"
+  },
+  {
+    id: 3,
+    title: "Nike Branding",
+    subtitle: "E-commerce Concept",
+    description: "A branding project for Nike, focusing on creating a visually compelling and responsive website design.",
+    tags: ["#react", "#tailwind", "#javascript"],
+    link: "https://github.com/teddyhabtamu/Nike-Shoes",
+    live: "https://nike-shoes-steel.vercel.app/",
+    image: "/images/nike.png"
+  },
+  {
+    id: 4,
+    title: "Fana Digital Library",
+    subtitle: "Archive System",
+    description: "Developed and deployed a digital library system for Fana Broadcasting Corporation, digitizing 100+ books.",
+    tags: ["#react", "#nodejs", "#mongodb", "#express"],
+    link: "https://github.com/teddyhabtamu/Fana-Digital-Library",
+    live: "https://fana-digital-library-ojng.vercel.app/",
+    image: "/images/fana.png"
+  },
+  {
+    id: 5,
+    title: "PeakPulse Fitness",
+    subtitle: "Health Tracker",
+    description: "A fitness tracking app that allows users to log and track workout activities and set goals.",
+    tags: ["#react", "#redux", "#tailwind", "#SQL"],
+    link: "https://github.com/teddyhabtamu/PeakPulse-Fitness-Tracker-",
+    live: "https://peak-pulse-fitness-tracker-kb1c.vercel.app/",
+    image: "/images/fit.png"
+  },
+  {
+    id: 6,
+    title: "Meme Generator",
+    subtitle: "Interactive App",
+    description: "A fun web app that allows users to create and share custom memes by uploading images and adding text.",
+    tags: ["#react", "#css"],
+    link: "https://github.com/teddyhabtamu/Meme-Generator-Web-App",
+    live: "https://meme-generator-web-app-phi.vercel.app/",
+    image: "/images/meme.png"
+  }
 ];
 
 const Projects: React.FC = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  // NEW STATE: Tracks if all projects should be shown
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const PROJECTS_LIMIT = 4;
+
+  // LOGIC: Determine which projects to display
+  const projectsToShow = showAllProjects 
+    ? projects
+    : projects.slice(0, PROJECTS_LIMIT);
+
+  // LOGIC: Check if we have more than the limit to hide
+  const hasMoreProjects = projects.length > PROJECTS_LIMIT;
 
   return (
     <section id="work" className="bg-white text-dark py-24 px-6 md:px-12">
@@ -75,58 +86,46 @@ const Projects: React.FC = () => {
         <h2 className="text-sm uppercase tracking-widest text-gray-600 mb-12">Selected Work</h2>
         
         <div className="flex flex-col">
-          {projects.map((project) => (
+          {projectsToShow.map((project) => ( // Mapped over the limited list
             <motion.div 
               key={project.id}
               initial={{ opacity: 0.8 }}
               whileHover={{ opacity: 1, paddingLeft: "1rem" }}
+              // Use layoutId for smoother transitions when projects are added/removed
+              layout 
               className="group relative border-t border-gray-200 py-12 transition-all duration-300 cursor-pointer"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              {project.live ? (
-                <a href={project.live} target="_blank" rel="noopener noreferrer">
-                  <div className="flex flex-col md:flex-row justify-between items-baseline md:items-center gap-4 z-10 relative">
-                    <div className="flex flex-col gap-1">
+              <div className="flex flex-col md:flex-row justify-between items-baseline md:items-center gap-4 z-10 relative">
+                <div className="flex flex-col gap-1">
+                  {project.live ? (
+                    <a href={project.live} target="_blank" rel="noopener noreferrer">
                       <h3 className="text-3xl md:text-5xl font-display font-bold group-hover:text-gray-800 transition-colors">
                         {project.title}
                       </h3>
-                      <span className="text-gray-600 text-sm md:text-base">{project.description}</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-6">
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map(tag => (
-                          <span key={tag} className="text-xs text-gray-600 border border-gray-300 px-2 py-1 rounded-full">{tag}</span>
-                        ))}
-                      </div>
-                      <a href={project.link} className="hidden md:flex items-center gap-2 text-sm font-medium text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
-                        source code <Github size={14} />
-                      </a>
-                    </div>
-                  </div>
-                </a>
-              ) : (
-                <div className="flex flex-col md:flex-row justify-between items-baseline md:items-center gap-4 z-10 relative">
-                  <div className="flex flex-col gap-1">
+                    </a>
+                  ) : (
                     <h3 className="text-3xl md:text-5xl font-display font-bold group-hover:text-gray-800 transition-colors">
                       {project.title}
                     </h3>
-                    <span className="text-gray-600 text-sm md:text-base">{project.description}</span>
+                  )}
+                  <span className="text-gray-600 text-sm md:text-base">{project.description}</span>
+                </div>
+
+                <div className="flex items-center gap-6">
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map(tag => (
+                      <span key={tag} className="text-xs text-gray-600 border border-gray-300 px-2 py-1 rounded-full">{tag}</span>
+                    ))}
                   </div>
-                  
-                  <div className="flex items-center gap-6">
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map(tag => (
-                        <span key={tag} className="text-xs text-gray-600 border border-gray-300 px-2 py-1 rounded-full">{tag}</span>
-                      ))}
-                    </div>
-                    <a href={project.link} className="hidden md:flex items-center gap-2 text-sm font-medium text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+                  {project.link && (
+                    <a href={project.link} className="hidden md:flex items-center gap-2 text-sm font-medium text-orange-600 hover:underline" target="_blank" rel="noopener noreferrer">
                       source code <Github size={14} />
                     </a>
-                  </div>
+                  )}
                 </div>
-              )}
+              </div>
 
               {/* Hover Image Reveal (Desktop Only) */}
               <AnimatePresence>
@@ -148,11 +147,17 @@ const Projects: React.FC = () => {
           ))}
         </div>
         
-        <div className="mt-12 flex justify-center">
-           <button className="px-8 py-4 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 hover:text-dark transition-colors duration-300 uppercase text-sm tracking-widest">
-             More Work
-           </button>
-        </div>
+        {/* CONDITIONAL BUTTON: Only show if there are more than 4 projects */}
+        {hasMoreProjects && (
+          <div className="mt-12 flex justify-center">
+            <button 
+              onClick={() => setShowAllProjects(!showAllProjects)} // Toggle state
+              className="px-8 py-4 border border-gray-300 rounded-full text-gray-700 hover:bg-orange-500 hover:text-white transition-colors duration-300 uppercase text-sm tracking-widest"
+            >
+              {showAllProjects ? 'Show Less' : 'More Work'}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

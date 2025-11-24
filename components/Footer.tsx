@@ -32,9 +32,10 @@ const Footer: React.FC = () => {
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
+                  // UPDATED: Hover state to use orange brand color
                   className="w-12 h-12 rounded-full border border-white/20 
                              flex items-center justify-center 
-                             hover:bg-white hover:text-black 
+                             hover:bg-orange-500 hover:border-orange-500 hover:text-white 
                              transition-colors duration-300"
                 >
                   <Icon size={20} strokeWidth={1.8} />
