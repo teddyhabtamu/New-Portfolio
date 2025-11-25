@@ -24,16 +24,16 @@ const Contact: React.FC = () => {
     setAlert(null);
 
     try {
-      await emailjs.send(
-        'service_7htvmpg',
-        'template_7kgwbbw',
-        {
-          fullName: formData.fullName,
-          email: formData.email,
-          message: formData.message,
-        },
-        'AGD0_3afrklercDPQ'
-      );
+      await emailjs.send(
+        process.env.VITE_EMAILJS_SERVICE_ID!,
+        process.env.VITE_EMAILJS_TEMPLATE_ID!,
+        {
+          fullName: formData.fullName,
+          email: formData.email,
+          message: formData.message,
+        },
+        process.env.VITE_EMAILJS_PUBLIC_KEY!
+      );
       setAlert({ type: 'success', message: 'Message sent successfully!' });
       setFormData({ fullName: '', email: '', message: '' });
     } catch (error) {
