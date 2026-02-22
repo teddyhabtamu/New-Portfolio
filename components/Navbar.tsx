@@ -9,38 +9,21 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ setBlurActive }) => {
   const [isOpen, setIsOpen] = useState(false);
-  // Initial state should be FALSE (we do NOT need light text) because the Hero section is light.
-  const [needsLightText, setNeedsLightText] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    // --- Define Section Scroll Ranges (You MUST fine-tune these values on your live site) ---
-    const RANGES_NEEDING_LIGHT_TEXT = [
-      { start: 500, end: 2000 },   // 1. About & Skills (Dark)
-      { start: 3500, end: 5000 },  // 2. Testimonials (Dark)
-      { start: 5000, end: 99999 }  // 3. Contact (Dark)
-    ];
-    // ---------------------------------------------------------------------
-
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      
-      const shouldBeLight = RANGES_NEEDING_LIGHT_TEXT.some(range => {
-        return scrollY >= range.start && scrollY < range.end;
-      });
-      
-      setNeedsLightText(shouldBeLight);
+      setScrolled(window.scrollY > 40);
     };
-
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); 
-
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleToggle = () => {
     const newState = !isOpen;
     setIsOpen(newState);
-    setBlurActive(newState); 
+    setBlurActive(newState);
   };
 
   const navItems = [
@@ -49,41 +32,53 @@ const Navbar: React.FC<NavbarProps> = ({ setBlurActive }) => {
     { name: 'Testimonials', href: '#testimonials' },
     { name: 'Contact', href: '#contact' },
   ];
-  
-  // DYNAMIC CLASS: If needsLightText is TRUE (we're in a dark section), use white. 
-  // Otherwise, use the dark/black color for the light background.
-  const navTextColor = needsLightText ? 'text-white' : 'text-stone-950';
 
   return (
-    // APPLIED DYNAMIC TEXT COLOR CLASS
-    <nav className={`fixed top-0 w-full z-50 px-6 py-6 md:px-12 ${navTextColor} pointer-events-none transition-colors duration-300`}>
-      <div className="flex justify-between items-center max-w-7xl mx-auto">
-        
+    <nav className={`fixed top-0 w-full z-50 px-6 md:px-12 pointer-events-none transition-all duration-500`}>
+      <div className={`max-w-7xl mx-auto mt-4 flex justify-between items-center px-6 py-3 rounded-2xl transition-all duration-500 pointer-events-auto
+        ${scrolled
+          ? 'bg-black/70 backdrop-blur-xl border border-white/8 shadow-2xl'
+          : 'bg-transparent'
+        }`}
+      >
+        {/* Logo */}
         <Magnetic className="pointer-events-auto">
-          <a href="#" className="cursor-pointer relative z-10">
-            {/* Logo remains visible */}
-            <img src="/images/text.svg" alt="Tewodros" className="h-6 w-auto" />
+          <a href="#" className="cursor-pointer relative z-10 group">
+            <img src="/images/text.svg" alt="Tewodros" className="h-6 w-auto brightness-0 invert group-hover:opacity-80 transition-opacity" />
           </a>
         </Magnetic>
 
-        {/* Desktop menu */}
-        <div className="hidden md:flex gap-8 pointer-events-auto">
+        {/* Desktop Nav */}
+        <div className="hidden md:flex gap-1 pointer-events-auto">
           {navItems.map((item) => (
             <Magnetic key={item.name}>
-              <a href={item.href} className="text-sm font-medium relative group">
+              <a
+                href={item.href}
+                className="relative px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 rounded-xl group"
+              >
                 {item.name}
-                {/* UPDATED: Changed bg-current to bg-orange-500 */}
-                <span className={`absolute -bottom-1 left-0 w-0 h-[1px] bg-orange-500 transition-all group-hover:w-full`}></span>
+                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-[2px] rounded-full bg-orange-500 group-hover:w-4/5 transition-all duration-300" />
               </a>
             </Magnetic>
           ))}
         </div>
 
-        {/* Mobile button */}
-        <div className="md:hidden pointer-events-auto">
-          <button onClick={handleToggle} className="p-2">
-            {!isOpen ? <Menu size={28} /> : null}
-          </button>
+        {/* CTA + Mobile toggle */}
+        <div className="flex items-center gap-3 pointer-events-auto">
+          <a
+            href="#contact"
+            className="hidden md:inline-flex items-center px-5 py-2 rounded-full bg-orange-500 text-white text-sm font-semibold hover:bg-orange-600 hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all duration-300"
+          >
+            Hire Me
+          </a>
+          <div className="md:hidden">
+            <button
+              onClick={handleToggle}
+              className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors"
+            >
+              {!isOpen ? <Menu size={20} /> : null}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -94,23 +89,40 @@ const Navbar: React.FC<NavbarProps> = ({ setBlurActive }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-stone-950/90 backdrop-blur-2xl z-40 flex flex-col items-center justify-center md:hidden pointer-events-auto text-white"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/95 backdrop-blur-2xl z-40 flex flex-col items-center justify-center md:hidden pointer-events-auto"
           >
-            <button onClick={handleToggle} className="absolute top-8 right-8 p-2 text-white">
-              <X size={32} />
+            <button
+              onClick={handleToggle}
+              className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 text-white"
+            >
+              <X size={20} />
             </button>
 
-            <div className="flex flex-col text-center gap-8">
-              {navItems.map((item) => (
-                <a
+            <div className="flex flex-col text-center gap-6">
+              {navItems.map((item, i) => (
+                <motion.a
                   key={item.name}
                   href={item.href}
                   onClick={handleToggle}
-                  className="text-3xl font-light"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.07 }}
+                  className="text-4xl font-display font-bold text-white/80 hover:text-white hover:text-orange-400 transition-colors"
                 >
                   {item.name}
-                </a>
+                </motion.a>
               ))}
+              <motion.a
+                href="#contact"
+                onClick={handleToggle}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navItems.length * 0.07 }}
+                className="mt-4 inline-flex justify-center items-center px-8 py-3 rounded-full bg-orange-500 text-white text-lg font-semibold"
+              >
+                Hire Me
+              </motion.a>
             </div>
           </motion.div>
         )}

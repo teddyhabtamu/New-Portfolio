@@ -11,13 +11,13 @@ import CustomCursor from './components/CustomCursor';
 import Lenis from '@studio-freight/lenis';
 
 const App: React.FC = () => {
-  
+
   useEffect(() => {
     // Initialize Smooth Scroll with custom options
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Standard easeOutExpo
-      orientation: 'vertical', 
+      orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
       touchMultiplier: 2,
@@ -41,7 +41,7 @@ const App: React.FC = () => {
   const [blurActive, setBlurActive] = useState(false);
 
   return (
-    <main className="bg-dark min-h-screen w-full cursor-none selection:bg-blue-500/30 selection:text-blue-200">
+    <main className="bg-[#080808] min-h-screen w-full cursor-none selection:bg-orange-500/30 selection:text-orange-100">
       <CustomCursor />
       <Navbar setBlurActive={setBlurActive} />
       <div className={blurActive ? "blur-xl transition-all duration-300" : "transition-all duration-300"}>

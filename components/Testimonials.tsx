@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Quote } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Testimonial } from '../types';
 
 const testimonials: Testimonial[] = [
@@ -24,46 +24,130 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 4,
-    quote: "Tewodros brought our Nike branding concept to life with clean code and smooth design execution. He’s not just a developer—he’s a creative partner.",
+    quote: "Tewodros brought our Nike branding concept to life with clean code and smooth design execution. He's not just a developer—he's a creative partner.",
     author: "Adrian",
     role: "Creative Director"
   }
 ];
 
 const Testimonials: React.FC = () => {
+  const [active, setActive] = useState(0);
+  const total = testimonials.length;
+
+  const prev = () => setActive((a) => (a - 1 + total) % total);
+  const next = () => setActive((a) => (a + 1) % total);
+
+  const item = testimonials[active];
+
   return (
-    <section id="testimonials" className="bg-secondary text-white py-32 px-6 md:px-12 overflow-hidden">
+    <section id="testimonials" className="bg-[#080808] text-white py-28 px-6 md:px-12 overflow-hidden border-t border-white/5">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-6xl font-display font-bold mb-16">Testimonials.</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {testimonials.map((item, i) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white/5 p-8 md:p-12 rounded-2xl relative border border-white/5 hover:border-white/10 transition-colors"
+
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div>
+            <p className="text-xs text-orange-400 uppercase tracking-[0.3em] font-medium mb-4">Social Proof</p>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-white">What Clients Say</h2>
+          </div>
+          {/* Navigation */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={prev}
+              className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:border-orange-500/50 hover:text-orange-400 transition-all duration-200"
             >
-              {/* 1. UPDATED: Quote icon color to orange-500 */}
-              <Quote className="text-orange-500 mb-6 opacity-50" size={40} />
-              <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-8 italic">
-                "{item.quote}"
-              </p>
-              <div className="flex items-center gap-4">
-                {/* 2. UPDATED: Author bubble gradient to orange/red for a warm brand look */}
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-sm font-bold">
-                  {item.author.charAt(0)}
+              <ChevronLeft size={18} />
+            </button>
+            <span className="text-sm text-gray-500 font-mono">
+              {String(active + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+            </span>
+            <button
+              onClick={next}
+              className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:border-orange-500/50 hover:text-orange-400 transition-all duration-200"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        </div>
+
+        {/* Featured testimonial */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -24 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="relative rounded-3xl border border-white/8 bg-white/3 p-10 md:p-14 mb-6"
+          >
+            {/* Glow */}
+            <div className="absolute top-0 left-1/4 w-1/2 h-1 bg-gradient-to-r from-transparent via-orange-500/40 to-transparent rounded-full" />
+
+            <div className="flex flex-col md:flex-row gap-10 items-start">
+              <div className="flex-1">
+                {/* Stars */}
+                <div className="flex gap-1 mb-6">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={16} className="fill-orange-400 text-orange-400" />
+                  ))}
                 </div>
-                <div>
-                  <h4 className="font-bold">{item.author}</h4>
-                  <p className="text-sm text-gray-500">{item.role}</p>
+
+                {/* Quote */}
+                <Quote size={36} className="text-orange-500/30 mb-4" />
+                <p className="text-xl md:text-2xl text-gray-200 leading-relaxed font-light italic mb-8">
+                  "{item.quote}"
+                </p>
+
+                {/* Author */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-lg font-bold text-white shadow-lg">
+                    {item.author.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white text-base">{item.author}</p>
+                    <p className="text-sm text-gray-500">{item.role}</p>
+                  </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Dot indicators */}
+        <div className="flex justify-center gap-2 mt-4">
+          {testimonials.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              className={`transition-all duration-300 rounded-full ${i === active ? 'w-6 h-2 bg-orange-500' : 'w-2 h-2 bg-white/20 hover:bg-white/40'}`}
+            />
           ))}
         </div>
+
+        {/* Grid of all testimonials (smaller, below) */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+          {testimonials.map((t, i) => (
+            <button
+              key={t.id}
+              onClick={() => setActive(i)}
+              className={`text-left p-5 rounded-2xl border transition-all duration-300 ${i === active
+                ? 'border-orange-500/40 bg-orange-500/5'
+                : 'border-white/6 bg-white/2 hover:border-white/15'
+                }`}
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-sm font-bold text-white">
+                  {t.author.charAt(0)}
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white leading-tight">{t.author}</p>
+                  <p className="text-[11px] text-gray-500">{t.role.split(',')[0]}</p>
+                </div>
+              </div>
+              <p className="text-xs text-gray-400 line-clamp-2 leading-relaxed">"{t.quote}"</p>
+            </button>
+          ))}
+        </div>
+
       </div>
     </section>
   );
