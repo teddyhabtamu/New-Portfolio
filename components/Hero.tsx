@@ -147,6 +147,8 @@ const Hero: React.FC = () => {
               <img
                 src="/images/profile.png"
                 alt="Tewodros Habtamu"
+                fetchPriority="high"
+                decoding="sync"
                 className="w-full h-full object-cover"
               />
               {/* Gradient overlay at bottom */}

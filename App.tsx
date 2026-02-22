@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Testimonials from './components/Testimonials';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 import Lenis from '@studio-freight/lenis';
+
+// Lazy load below-the-fold components
+const About = lazy(() => import('./components/About'));
+const Skills = lazy(() => import('./components/Skills'));
+const Projects = lazy(() => import('./components/Projects'));
+const Testimonials = lazy(() => import('./components/Testimonials'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
+
+// Fallback skeleton or blank space for lazy loaded sections
+const SectionFallback = () => <div className="min-h-[50vh] bg-[#080808]" />;
 
 const App: React.FC = () => {
 
@@ -46,12 +51,14 @@ const App: React.FC = () => {
       <Navbar setBlurActive={setBlurActive} />
       <div className={blurActive ? "blur-xl transition-all duration-300" : "transition-all duration-300"}>
         <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Testimonials />
-        <Contact />
-        <Footer />
+        <Suspense fallback={<SectionFallback />}>
+          <About />
+          <Skills />
+          <Projects />
+          <Testimonials />
+          <Contact />
+          <Footer />
+        </Suspense>
       </div>
     </main>
   );
