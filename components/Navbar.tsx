@@ -36,8 +36,8 @@ const Navbar: React.FC<NavbarProps> = ({ setBlurActive }) => {
   ];
 
   return (
-    <nav className={`fixed top-0 w-full z-50 px-6 md:px-12 pointer-events-none transition-all duration-500`}>
-      <div className={`max-w-7xl mx-auto mt-4 flex justify-between items-center px-6 py-3 rounded-2xl transition-all duration-500 pointer-events-auto
+    <nav className={`fixed top-0 w-full z-50 px-4 md:px-12 pointer-events-none transition-all duration-500`}>
+      <div className={`max-w-7xl mx-auto mt-4 flex justify-between items-center px-4 sm:px-6 py-3 rounded-2xl transition-all duration-500 pointer-events-auto
         ${scrolled
           ? 'dark:bg-black/70 bg-white/80 backdrop-blur-xl dark:border-white/8 border-black/10 border shadow-2xl'
           : 'bg-transparent'
@@ -49,7 +49,7 @@ const Navbar: React.FC<NavbarProps> = ({ setBlurActive }) => {
             <img
               src="/images/text.svg"
               alt="Tewodros"
-              className="h-6 w-auto brightness-0 dark:invert invert-0 group-hover:opacity-80 transition-opacity"
+              className="h-4 sm:h-5 md:h-6 w-auto brightness-0 dark:invert invert-0 group-hover:opacity-80 transition-opacity"
             />
           </a>
         </Magnetic>
@@ -70,7 +70,7 @@ const Navbar: React.FC<NavbarProps> = ({ setBlurActive }) => {
         </div>
 
         {/* CTA + Theme Toggle + Mobile toggle */}
-        <div className="flex items-center gap-3 pointer-events-auto">
+        <div className="flex items-center gap-2 sm:gap-3 pointer-events-auto">
           {/* Theme Toggle Button */}
           <motion.button
             onClick={toggleTheme}
