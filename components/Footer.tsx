@@ -19,14 +19,14 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-[#080808] text-white pt-16 pb-10 px-6 md:px-12 border-t border-white/5">
+    <footer className="dark:bg-[#080808] bg-[#F5F5F0] dark:text-white text-gray-900 pt-16 pb-10 px-6 md:px-12 dark:border-white/5 border-black/5 border-t transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
 
         {/* Top CTA section */}
-        <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-8 pb-12 border-b border-white/8 mb-10">
+        <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-8 pb-12 dark:border-white/8 border-black/8 border-b mb-10">
           <div className="text-center md:text-left">
             <p className="text-xs text-orange-400 uppercase tracking-[0.3em] font-medium mb-3">Available for work</p>
-            <h2 className="text-5xl md:text-7xl font-display font-bold text-white/10 tracking-tighter select-none">
+            <h2 className="text-5xl md:text-7xl font-display font-bold dark:text-white/10 text-black/10 tracking-tighter select-none">
               Tewodros
             </h2>
           </div>
@@ -45,14 +45,14 @@ const Footer: React.FC = () => {
 
           {/* Logo + copyright */}
           <div className="flex items-center gap-4">
-            <img src="/images/text.svg" alt="Logo" className="h-5 w-auto brightness-0 invert opacity-40" />
-            <span className="text-gray-600 text-xs">© {currentYear} Tewodros Habtamu. All rights reserved.</span>
+            <img src="/images/text.svg" alt="Logo" className="h-5 w-auto brightness-0 dark:invert opacity-40" />
+            <span className="dark:text-gray-600 text-gray-400 text-xs">© {currentYear} Tewodros Habtamu. All rights reserved.</span>
           </div>
 
           {/* Nav links */}
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map((l) => (
-              <a key={l.name} href={l.href} className="text-xs text-gray-500 hover:text-white transition-colors">
+              <a key={l.name} href={l.href} className="text-xs dark:text-gray-500 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors">
                 {l.name}
               </a>
             ))}
@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={name}
-                  className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-gray-500 hover:border-orange-500/50 hover:text-orange-400 transition-all duration-200"
+                  className="w-9 h-9 rounded-full dark:border-white/10 border-black/10 border flex items-center justify-center dark:text-gray-500 text-gray-500 hover:border-orange-500/50 hover:text-orange-400 transition-all duration-200"
                 >
                   <Icon size={15} strokeWidth={1.8} />
                 </a>

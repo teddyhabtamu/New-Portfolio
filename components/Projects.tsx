@@ -67,20 +67,20 @@ const projects: Project[] = [
 ];
 
 const tagColors: Record<string, string> = {
-  React: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
-  Tailwind: "bg-teal-500/10 text-teal-400 border-teal-500/20",
-  "Node.js": "bg-green-500/10 text-green-400 border-green-500/20",
-  MongoDB: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-  Express: "bg-gray-500/10 text-gray-400 border-gray-500/20",
-  JavaScript: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
-  Redux: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-  SQL: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-  Frontend: "bg-orange-500/10 text-orange-400 border-orange-500/20",
-  CSS: "bg-pink-500/10 text-pink-400 border-pink-500/20",
+  React: "bg-cyan-500/10 text-cyan-500 border-cyan-500/20",
+  Tailwind: "bg-teal-500/10 text-teal-500 border-teal-500/20",
+  "Node.js": "bg-green-500/10 text-green-500 border-green-500/20",
+  MongoDB: "bg-emerald-500/10 text-emerald-500 border-emerald-500/20",
+  Express: "bg-gray-500/10 text-gray-500 border-gray-500/20",
+  JavaScript: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20",
+  Redux: "bg-purple-500/10 text-purple-500 border-purple-500/20",
+  SQL: "bg-blue-500/10 text-blue-500 border-blue-500/20",
+  Frontend: "bg-orange-500/10 text-orange-500 border-orange-500/20",
+  CSS: "bg-pink-500/10 text-pink-500 border-pink-500/20",
 };
 
 const getTagColor = (tag: string) =>
-  tagColors[tag] || "bg-white/5 text-gray-400 border-white/10";
+  tagColors[tag] || "dark:bg-white/5 bg-black/5 text-gray-500 dark:border-white/10 border-black/10";
 
 const Projects: React.FC = () => {
   const [showAll, setShowAll] = useState(false);
@@ -88,103 +88,105 @@ const Projects: React.FC = () => {
   const displayed = showAll ? projects : projects.slice(0, LIMIT);
 
   return (
-    <section id="work" className="bg-[#111111] text-white py-28 px-6 md:px-12">
+    <section id="work" className="dark:bg-[#111111] bg-white dark:text-white text-gray-900 py-28 px-6 md:px-12 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div>
             <p className="text-xs text-orange-400 uppercase tracking-[0.3em] font-medium mb-4">Portfolio</p>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-white">Selected Work</h2>
+            <h2 className="text-4xl md:text-5xl font-display font-bold dark:text-white text-gray-900">Selected Work</h2>
           </div>
-          <p className="text-gray-500 text-sm max-w-xs">
+          <p className="dark:text-gray-500 text-gray-500 text-sm max-w-xs">
             A collection of my best projects spanning web apps, landing pages, and full-stack systems.
           </p>
         </div>
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {displayed.map((project, i) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.5 }}
-              className="group relative rounded-3xl border border-white/8 overflow-hidden bg-white/3 hover:border-orange-500/25 transition-all duration-500"
-            >
-              {/* Image */}
-              <div className="relative w-full h-52 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-black/10 to-transparent" />
+          <AnimatePresence>
+            {displayed.map((project) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.5 }}
+                className="group relative rounded-3xl dark:border-white/8 border-black/8 border overflow-hidden dark:bg-white/3 bg-black/2 hover:border-orange-500/25 transition-all duration-500"
+              >
+                {/* Image */}
+                <div className="relative w-full h-52 overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 dark:bg-gradient-to-t dark:from-[#111111] from-white/80 via-black/10 to-transparent" />
 
-                {/* Action buttons on hover */}
-                <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-9 h-9 flex items-center justify-center rounded-full bg-black/60 backdrop-blur-sm border border-white/20 text-white hover:bg-orange-500 hover:border-orange-500 transition-all duration-200"
-                    >
-                      <ExternalLink size={14} />
-                    </a>
-                  )}
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-9 h-9 flex items-center justify-center rounded-full bg-black/60 backdrop-blur-sm border border-white/20 text-white hover:bg-orange-500 hover:border-orange-500 transition-all duration-200"
-                    >
-                      <Github size={14} />
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <div className="flex items-start justify-between gap-3 mb-3">
-                  <div>
-                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">{project.subtitle}</p>
-                    <h3 className="text-xl font-display font-bold text-white group-hover:text-orange-100 transition-colors">
-                      {project.title}
-                    </h3>
+                  {/* Action buttons on hover */}
+                  <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-9 h-9 flex items-center justify-center rounded-full bg-black/60 backdrop-blur-sm border border-white/20 text-white hover:bg-orange-500 hover:border-orange-500 transition-all duration-200"
+                      >
+                        <ExternalLink size={14} />
+                      </a>
+                    )}
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-9 h-9 flex items-center justify-center rounded-full bg-black/60 backdrop-blur-sm border border-white/20 text-white hover:bg-orange-500 hover:border-orange-500 transition-all duration-200"
+                      >
+                        <Github size={14} />
+                      </a>
+                    )}
                   </div>
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full border border-white/10 text-gray-400 hover:border-orange-500 hover:text-orange-400 transition-all group/btn"
-                    >
-                      <ArrowUpRight size={16} className="group-hover/btn:rotate-45 transition-transform duration-200" />
-                    </a>
-                  )}
                 </div>
-                <p className="text-sm text-gray-400 leading-relaxed mb-4">{project.description}</p>
 
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tags.map(tag => (
-                    <span
-                      key={tag}
-                      className={`text-[11px] font-medium px-2.5 py-1 rounded-full border ${getTagColor(tag)}`}
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                {/* Content */}
+                <div className="p-6">
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <div>
+                      <p className="text-xs dark:text-gray-500 text-gray-400 uppercase tracking-widest mb-1">{project.subtitle}</p>
+                      <h3 className="text-xl font-display font-bold dark:text-white text-gray-900 group-hover:text-orange-500 transition-colors">
+                        {project.title}
+                      </h3>
+                    </div>
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full dark:border-white/10 border-black/10 border dark:text-gray-400 text-gray-500 hover:border-orange-500 hover:text-orange-400 transition-all group/btn"
+                      >
+                        <ArrowUpRight size={16} className="group-hover/btn:rotate-45 transition-transform duration-200" />
+                      </a>
+                    )}
+                  </div>
+                  <p className="text-sm dark:text-gray-400 text-gray-500 leading-relaxed mb-4">{project.description}</p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tags.map(tag => (
+                      <span
+                        key={tag}
+                        className={`text-[11px] font-medium px-2.5 py-1 rounded-full border ${getTagColor(tag)}`}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
 
         {/* Show more */}
@@ -192,7 +194,7 @@ const Projects: React.FC = () => {
           <div className="mt-12 flex justify-center">
             <button
               onClick={() => setShowAll(!showAll)}
-              className="group flex items-center gap-2 px-8 py-4 rounded-full border border-white/15 text-gray-300 text-sm font-semibold hover:border-orange-500/50 hover:text-white hover:bg-orange-500/8 transition-all duration-300"
+              className="group flex items-center gap-2 px-8 py-4 rounded-full dark:border-white/15 border-black/15 border dark:text-gray-300 text-gray-600 text-sm font-semibold hover:border-orange-500/50 dark:hover:text-white hover:text-gray-900 hover:bg-orange-500/8 transition-all duration-300"
             >
               {showAll ? 'Show Less' : 'View More Projects'}
               <ArrowUpRight size={15} className={`transition-transform duration-300 ${showAll ? 'rotate-180' : 'group-hover:rotate-45'}`} />

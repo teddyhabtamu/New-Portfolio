@@ -40,29 +40,29 @@ const Testimonials: React.FC = () => {
   const item = testimonials[active];
 
   return (
-    <section id="testimonials" className="bg-[#080808] text-white py-28 px-6 md:px-12 overflow-hidden border-t border-white/5">
+    <section id="testimonials" className="dark:bg-[#080808] bg-[#F5F5F0] dark:text-white text-gray-900 py-28 px-6 md:px-12 overflow-hidden dark:border-white/5 border-black/5 border-t transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div>
             <p className="text-xs text-orange-400 uppercase tracking-[0.3em] font-medium mb-4">Social Proof</p>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-white">What Clients Say</h2>
+            <h2 className="text-4xl md:text-5xl font-display font-bold dark:text-white text-gray-900">What Clients Say</h2>
           </div>
           {/* Navigation */}
           <div className="flex items-center gap-3">
             <button
               onClick={prev}
-              className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:border-orange-500/50 hover:text-orange-400 transition-all duration-200"
+              className="w-11 h-11 rounded-full dark:border-white/10 border-black/10 border flex items-center justify-center dark:text-gray-400 text-gray-500 hover:border-orange-500/50 hover:text-orange-400 transition-all duration-200"
             >
               <ChevronLeft size={18} />
             </button>
-            <span className="text-sm text-gray-500 font-mono">
+            <span className="text-sm dark:text-gray-500 text-gray-400 font-mono">
               {String(active + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
             </span>
             <button
               onClick={next}
-              className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:border-orange-500/50 hover:text-orange-400 transition-all duration-200"
+              className="w-11 h-11 rounded-full dark:border-white/10 border-black/10 border flex items-center justify-center dark:text-gray-400 text-gray-500 hover:border-orange-500/50 hover:text-orange-400 transition-all duration-200"
             >
               <ChevronRight size={18} />
             </button>
@@ -77,7 +77,7 @@ const Testimonials: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -24 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="relative rounded-3xl border border-white/8 bg-white/3 p-10 md:p-14 mb-6"
+            className="relative rounded-3xl dark:border-white/8 border-black/8 border dark:bg-white/3 bg-black/2 p-10 md:p-14 mb-6"
           >
             {/* Glow */}
             <div className="absolute top-0 left-1/4 w-1/2 h-1 bg-gradient-to-r from-transparent via-orange-500/40 to-transparent rounded-full" />
@@ -93,7 +93,7 @@ const Testimonials: React.FC = () => {
 
                 {/* Quote */}
                 <Quote size={36} className="text-orange-500/30 mb-4" />
-                <p className="text-xl md:text-2xl text-gray-200 leading-relaxed font-light italic mb-8">
+                <p className="text-xl md:text-2xl dark:text-gray-200 text-gray-700 leading-relaxed font-light italic mb-8">
                   "{item.quote}"
                 </p>
 
@@ -103,8 +103,8 @@ const Testimonials: React.FC = () => {
                     {item.author.charAt(0)}
                   </div>
                   <div>
-                    <p className="font-semibold text-white text-base">{item.author}</p>
-                    <p className="text-sm text-gray-500">{item.role}</p>
+                    <p className="font-semibold dark:text-white text-gray-900 text-base">{item.author}</p>
+                    <p className="text-sm dark:text-gray-500 text-gray-500">{item.role}</p>
                   </div>
                 </div>
               </div>
@@ -118,7 +118,7 @@ const Testimonials: React.FC = () => {
             <button
               key={i}
               onClick={() => setActive(i)}
-              className={`transition-all duration-300 rounded-full ${i === active ? 'w-6 h-2 bg-orange-500' : 'w-2 h-2 bg-white/20 hover:bg-white/40'}`}
+              className={`transition-all duration-300 rounded-full ${i === active ? 'w-6 h-2 bg-orange-500' : 'w-2 h-2 dark:bg-white/20 bg-black/20 dark:hover:bg-white/40 hover:bg-black/40'}`}
             />
           ))}
         </div>
@@ -131,7 +131,7 @@ const Testimonials: React.FC = () => {
               onClick={() => setActive(i)}
               className={`text-left p-5 rounded-2xl border transition-all duration-300 ${i === active
                 ? 'border-orange-500/40 bg-orange-500/5'
-                : 'border-white/6 bg-white/2 hover:border-white/15'
+                : 'dark:border-white/6 border-black/6 dark:bg-white/2 bg-black/2 dark:hover:border-white/15 hover:border-black/15'
                 }`}
             >
               <div className="flex items-center gap-3 mb-3">
@@ -139,11 +139,11 @@ const Testimonials: React.FC = () => {
                   {t.author.charAt(0)}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white leading-tight">{t.author}</p>
-                  <p className="text-[11px] text-gray-500">{t.role.split(',')[0]}</p>
+                  <p className="text-sm font-semibold dark:text-white text-gray-900 leading-tight">{t.author}</p>
+                  <p className="text-[11px] dark:text-gray-500 text-gray-500">{t.role.split(',')[0]}</p>
                 </div>
               </div>
-              <p className="text-xs text-gray-400 line-clamp-2 leading-relaxed">"{t.quote}"</p>
+              <p className="text-xs dark:text-gray-400 text-gray-500 line-clamp-2 leading-relaxed">"{t.quote}"</p>
             </button>
           ))}
         </div>

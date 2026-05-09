@@ -19,10 +19,10 @@ const Contact: React.FC = () => {
     setAlert(null);
     try {
       await emailjs.send(
-        process.env.VITE_EMAILJS_SERVICE_ID!,
-        process.env.VITE_EMAILJS_TEMPLATE_ID!,
+        import.meta.env.VITE_EMAILJS_SERVICE_ID!,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID!,
         { fullName: formData.fullName, email: formData.email, message: formData.message },
-        process.env.VITE_EMAILJS_PUBLIC_KEY!
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY!
       );
       setAlert({ type: 'success', message: 'Message sent successfully! I\'ll get back to you soon.' });
       setFormData({ fullName: '', email: '', message: '' });
@@ -40,7 +40,7 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="bg-[#111111] text-white py-28 px-6 md:px-12 relative overflow-hidden border-t border-white/5">
+    <section id="contact" className="dark:bg-[#111111] bg-white dark:text-white text-gray-900 py-28 px-6 md:px-12 relative overflow-hidden dark:border-white/5 border-black/5 border-t transition-colors duration-300">
       {/* Ambient glow */}
       <div className="absolute bottom-0 right-0 w-[600px] h-[400px] bg-orange-500/5 blur-[120px] pointer-events-none" />
 
@@ -49,7 +49,7 @@ const Contact: React.FC = () => {
         {/* Header */}
         <div className="mb-16">
           <p className="text-xs text-orange-400 uppercase tracking-[0.3em] font-medium mb-4">Get In Touch</p>
-          <h2 className="text-4xl md:text-6xl font-display font-bold text-white">
+          <h2 className="text-4xl md:text-6xl font-display font-bold dark:text-white text-gray-900">
             Let's build something
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
@@ -64,16 +64,16 @@ const Contact: React.FC = () => {
           <div className="lg:col-span-2 space-y-8">
             {/* Avatar */}
             <div className="flex items-center gap-4 mb-8">
-              <div className="relative w-16 h-16 rounded-2xl overflow-hidden border border-white/10">
+              <div className="relative w-16 h-16 rounded-2xl overflow-hidden dark:border-white/10 border-black/10 border">
                 <img src="/images/profile.png" alt="Avatar" className="w-full h-full object-cover" />
               </div>
               <div>
-                <p className="text-white font-semibold">Tewodros Habtamu</p>
-                <p className="text-sm text-gray-500">Full Stack Developer</p>
+                <p className="dark:text-white text-gray-900 font-semibold">Tewodros Habtamu</p>
+                <p className="text-sm dark:text-gray-500 text-gray-500">Full Stack Developer</p>
               </div>
             </div>
 
-            <p className="text-gray-400 text-base leading-relaxed">
+            <p className="dark:text-gray-400 text-gray-600 text-base leading-relaxed">
               I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
             </p>
 
@@ -85,13 +85,13 @@ const Contact: React.FC = () => {
                 { icon: MapPin, label: 'Addis Ababa, Ethiopia', href: undefined },
               ].map(({ icon: Icon, label, href }) => (
                 <div key={label} className="flex items-center gap-3 group">
-                  <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 group-hover:border-orange-500/30 group-hover:text-orange-400 transition-all duration-200 flex-shrink-0">
+                  <div className="w-9 h-9 rounded-xl dark:bg-white/5 bg-black/5 dark:border-white/10 border-black/10 border flex items-center justify-center dark:text-gray-400 text-gray-500 group-hover:border-orange-500/30 group-hover:text-orange-400 transition-all duration-200 flex-shrink-0">
                     <Icon size={16} />
                   </div>
                   {href ? (
-                    <a href={href} className="text-sm text-gray-400 hover:text-white transition-colors">{label}</a>
+                    <a href={href} className="text-sm dark:text-gray-400 text-gray-600 dark:hover:text-white hover:text-gray-900 transition-colors">{label}</a>
                   ) : (
-                    <span className="text-sm text-gray-400">{label}</span>
+                    <span className="text-sm dark:text-gray-400 text-gray-600">{label}</span>
                   )}
                 </div>
               ))}
@@ -106,7 +106,7 @@ const Contact: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:border-orange-500/50 hover:text-orange-400 hover:bg-orange-500/8 transition-all duration-200"
+                  className="w-10 h-10 rounded-full dark:border-white/10 border-black/10 border flex items-center justify-center dark:text-gray-400 text-gray-500 hover:border-orange-500/50 hover:text-orange-400 hover:bg-orange-500/8 transition-all duration-200"
                 >
                   <Icon size={16} />
                 </a>
@@ -116,12 +116,12 @@ const Contact: React.FC = () => {
 
           {/* Form */}
           <div className="lg:col-span-3">
-            <div className="bg-white/3 rounded-3xl border border-white/8 p-8 md:p-10">
+            <div className="dark:bg-white/3 bg-black/2 rounded-3xl dark:border-white/8 border-black/8 border p-8 md:p-10">
               <form onSubmit={handleSubmit} className="space-y-6">
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label htmlFor="fullName" className="text-xs font-medium text-gray-400 uppercase tracking-wider">
+                    <label htmlFor="fullName" className="text-xs font-medium dark:text-gray-400 text-gray-500 uppercase tracking-wider">
                       Your Name
                     </label>
                     <input
@@ -132,11 +132,11 @@ const Contact: React.FC = () => {
                       placeholder="John Doe"
                       value={formData.fullName}
                       onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-orange-500/60 focus:bg-orange-500/5 transition-all duration-200"
+                      className="w-full dark:bg-white/5 bg-black/3 dark:border-white/10 border-black/10 border rounded-xl px-4 py-3 dark:text-white text-gray-900 text-sm dark:placeholder:text-gray-600 placeholder:text-gray-400 focus:outline-none focus:border-orange-500/60 dark:focus:bg-orange-500/5 focus:bg-orange-500/5 transition-all duration-200"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="email" className="text-xs font-medium text-gray-400 uppercase tracking-wider">
+                    <label htmlFor="email" className="text-xs font-medium dark:text-gray-400 text-gray-500 uppercase tracking-wider">
                       Your Email
                     </label>
                     <input
@@ -147,13 +147,13 @@ const Contact: React.FC = () => {
                       placeholder="john@email.com"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-orange-500/60 focus:bg-orange-500/5 transition-all duration-200"
+                      className="w-full dark:bg-white/5 bg-black/3 dark:border-white/10 border-black/10 border rounded-xl px-4 py-3 dark:text-white text-gray-900 text-sm dark:placeholder:text-gray-600 placeholder:text-gray-400 focus:outline-none focus:border-orange-500/60 dark:focus:bg-orange-500/5 focus:bg-orange-500/5 transition-all duration-200"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="message" className="text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  <label htmlFor="message" className="text-xs font-medium dark:text-gray-400 text-gray-500 uppercase tracking-wider">
                     Your Message
                   </label>
                   <textarea
@@ -164,7 +164,7 @@ const Contact: React.FC = () => {
                     placeholder="Tell me about your project..."
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-orange-500/60 focus:bg-orange-500/5 transition-all duration-200 resize-none"
+                    className="w-full dark:bg-white/5 bg-black/3 dark:border-white/10 border-black/10 border rounded-xl px-4 py-3 dark:text-white text-gray-900 text-sm dark:placeholder:text-gray-600 placeholder:text-gray-400 focus:outline-none focus:border-orange-500/60 dark:focus:bg-orange-500/5 focus:bg-orange-500/5 transition-all duration-200 resize-none"
                   />
                 </div>
 
@@ -173,8 +173,8 @@ const Contact: React.FC = () => {
                     initial={{ opacity: 0, y: -8 }}
                     animate={{ opacity: 1, y: 0 }}
                     className={`px-4 py-3 rounded-xl text-sm font-medium ${alert.type === 'success'
-                        ? 'bg-green-500/10 border border-green-500/30 text-green-400'
-                        : 'bg-red-500/10 border border-red-500/30 text-red-400'
+                      ? 'bg-green-500/10 border border-green-500/30 text-green-500'
+                      : 'bg-red-500/10 border border-red-500/30 text-red-500'
                       }`}
                   >
                     {alert.message}

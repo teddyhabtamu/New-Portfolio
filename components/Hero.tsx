@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDown, Sparkles } from 'lucide-react';
 
@@ -24,19 +24,19 @@ const Hero: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#080808] text-white pt-20 pb-10"
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden dark:bg-[#080808] bg-[#F5F5F0] dark:text-white text-gray-900 pt-20 pb-32 md:pb-10 transition-colors duration-300"
     >
       {/* Layered ambient background */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Radial glow top center */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-orange-500/8 blur-[130px] rounded-full" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] dark:bg-orange-500/8 bg-orange-500/12 blur-[130px] rounded-full" />
         {/* Subtle left glow */}
-        <div className="absolute top-1/3 -left-20 w-[500px] h-[500px] bg-orange-600/5 blur-[100px] rounded-full" />
+        <div className="absolute top-1/3 -left-20 w-[500px] h-[500px] dark:bg-orange-600/5 bg-orange-600/8 blur-[100px] rounded-full" />
         {/* Grid overlay */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 dark:opacity-[0.03] opacity-[0.06]"
           style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(rgba(0,0,0,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.5) 1px, transparent 1px)',
             backgroundSize: '60px 60px',
           }}
         />
@@ -57,7 +57,7 @@ const Hero: React.FC = () => {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 w-fit"
           >
             <Sparkles size={13} className="text-orange-400" />
-            <span className="text-xs font-medium text-orange-300 tracking-widest uppercase">Available for work</span>
+            <span className="text-xs font-medium text-orange-400 tracking-widest uppercase">Available for work</span>
           </motion.div>
 
           {/* Name + Title */}
@@ -66,13 +66,13 @@ const Hero: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
           >
-            <p className="text-gray-400 text-lg font-display font-medium mb-3">
+            <p className="dark:text-gray-400 text-gray-500 text-lg font-display font-medium mb-3">
               Hi, I'm Tewodros Habtamu
             </p>
-            <h1 className="font-display font-bold leading-[1.05] tracking-tight text-white">
+            <h1 className="font-display font-bold leading-[1.05] tracking-tight dark:text-white text-gray-900">
               <span className="text-5xl md:text-6xl lg:text-7xl block">Web Developer</span>
               <span className="text-5xl md:text-6xl lg:text-7xl block mt-1">
-                & {" "}
+                &{" "}
                 <span className="relative inline-block">
                   <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-red-500">
                     Data Scientist
@@ -87,7 +87,7 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="text-gray-400 text-base md:text-lg leading-relaxed max-w-md font-sans"
+            className="dark:text-gray-400 text-gray-600 text-base md:text-lg leading-relaxed max-w-md font-sans"
           >
             I transform design concepts into fast, interactive web experiences that leave lasting impressions. Passionate about aesthetics, performance, and clean code.
           </motion.p>
@@ -109,7 +109,7 @@ const Hero: React.FC = () => {
             <a
               href={resumeLink}
               download="Tewodros_Resume.pdf"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/15 text-white text-sm font-semibold backdrop-blur-sm hover:border-orange-500/60 hover:bg-white/5 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full dark:border-white/15 border-black/15 border dark:text-white text-gray-800 text-sm font-semibold backdrop-blur-sm dark:hover:border-orange-500/60 hover:border-orange-500/60 dark:hover:bg-white/5 hover:bg-black/5 transition-all duration-300"
             >
               Download CV
             </a>
@@ -120,12 +120,12 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.45 }}
-            className="flex items-center gap-8 pt-4 border-t border-white/8"
+            className="flex items-center gap-8 pt-4 dark:border-white/8 border-black/10 border-t"
           >
             {stats.map((stat, i) => (
               <div key={i} className="text-center">
-                <p className="text-2xl font-display font-bold text-white">{stat.value}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{stat.label}</p>
+                <p className="text-2xl font-display font-bold dark:text-white text-gray-900">{stat.value}</p>
+                <p className="text-xs dark:text-gray-500 text-gray-500 mt-0.5">{stat.label}</p>
               </div>
             ))}
           </motion.div>
@@ -143,7 +143,7 @@ const Hero: React.FC = () => {
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/20 to-transparent blur-2xl scale-110" />
 
             {/* Main card */}
-            <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-[3/4]">
+            <div className="relative rounded-3xl overflow-hidden dark:border-white/10 border-black/10 border shadow-2xl aspect-[3/4]">
               <img
                 src="/images/profile.png"
                 alt="Tewodros Habtamu"
@@ -159,10 +159,10 @@ const Hero: React.FC = () => {
             <motion.div
               animate={{ y: [0, -6, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="absolute -bottom-5 left-6 flex items-center gap-3 bg-[#1a1a1a]/90 backdrop-blur-xl border border-white/10 rounded-2xl px-4 py-3 shadow-xl"
+              className="absolute -bottom-5 left-6 flex items-center gap-3 dark:bg-[#1a1a1a]/90 bg-white/90 backdrop-blur-xl dark:border-white/10 border-black/10 border rounded-2xl px-4 py-3 shadow-xl"
             >
               <div className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-xs font-medium text-gray-200">Open to opportunities</span>
+              <span className="text-xs font-medium dark:text-gray-200 text-gray-700">Open to opportunities</span>
             </motion.div>
 
             {/* Floating tech badge */}
@@ -182,7 +182,7 @@ const Hero: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-600"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 dark:text-gray-600 text-gray-400"
       >
         <span className="text-xs uppercase tracking-widest">Scroll</span>
         <motion.div

@@ -2,6 +2,7 @@ import React, { useState, useEffect, Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import CustomCursor from './components/CustomCursor';
+import { ThemeProvider } from './components/ThemeContext';
 import Lenis from '@studio-freight/lenis';
 
 // Lazy load below-the-fold components
@@ -13,10 +14,9 @@ const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 
 // Fallback skeleton or blank space for lazy loaded sections
-const SectionFallback = () => <div className="min-h-[50vh] bg-[#080808]" />;
+const SectionFallback = () => <div className="min-h-[50vh] bg-[#080808] dark:bg-[#080808]" />;
 
-const App: React.FC = () => {
-
+const AppInner: React.FC = () => {
   useEffect(() => {
     // Initialize Smooth Scroll with custom options
     const lenis = new Lenis({
@@ -46,7 +46,7 @@ const App: React.FC = () => {
   const [blurActive, setBlurActive] = useState(false);
 
   return (
-    <main className="bg-[#080808] min-h-screen w-full cursor-none selection:bg-orange-500/30 selection:text-orange-100">
+    <main className="bg-[#F5F5F0] dark:bg-[#080808] min-h-screen w-full cursor-none selection:bg-orange-500/30 selection:text-orange-100 transition-colors duration-300">
       <CustomCursor />
       <Navbar setBlurActive={setBlurActive} />
       <div className={blurActive ? "blur-xl transition-all duration-300" : "transition-all duration-300"}>
@@ -63,5 +63,11 @@ const App: React.FC = () => {
     </main>
   );
 };
+
+const App: React.FC = () => (
+  <ThemeProvider>
+    <AppInner />
+  </ThemeProvider>
+);
 
 export default App;

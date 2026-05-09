@@ -35,6 +35,7 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
+/* Dark mode base (default) */
 html, body {
   margin: 0;
   padding: 0;
@@ -44,6 +45,13 @@ html, body {
   color: #EDEDED;
   overflow-x: hidden;
   overflow-y: auto;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light mode overrides */
+html:not(.dark), html:not(.dark) body {
+  background-color: #F5F5F0;
+  color: #111111;
 }
 
 /* Custom Scrollbar */
@@ -55,12 +63,25 @@ html, body {
   background: #0C0C0C;
 }
 
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: #F0F0EA;
+}
+
 ::-webkit-scrollbar-thumb {
   background: #333;
   border-radius: 5px;
   border: 2px solid #0C0C0C;
 }
 
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: #C0C0B8;
+  border-color: #F0F0EA;
+}
+
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: #999990;
 }
