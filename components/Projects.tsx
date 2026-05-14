@@ -5,6 +5,26 @@ import { Project } from '../types';
 
 const projects: Project[] = [
   {
+    id: 7,
+    title: "Smart Study",
+    subtitle: "AI Study App",
+    description: "An AI-powered studying platform that helps students learn effectively with personalized content and interactive features.",
+    tags: ["React", "Next.js", "Tailwind", "AI", "Backend", "Telebirr"],
+    link: "https://github.com/teddyhabtamu/Smart-Study",
+    live: "https://ethio-smart-study.vercel.app",
+    image: "/images/smartStudy.png"
+  },
+  {
+    id: 8,
+    title: "Agar Ride",
+    subtitle: "Ride-Sharing Commute App",
+    description: "A ride-sharing platform connecting commuters in Addis Ababa to share rides and split costs by up to 75%.",
+    tags: ["React", "Vite", "Tailwind", "Backend", "Telebirr"],
+    link: "https://github.com/teddyhabtamu/agar",
+    live: "https://agar-ride.vercel.app",
+    image: "/images/agar.png"
+  },
+  {
     id: 1,
     title: "Altech Valve Management System",
     subtitle: "Enterprise Web App",
@@ -25,6 +45,26 @@ const projects: Project[] = [
     image: "/images/brain.png"
   },
   {
+    id: 9,
+    title: "Dunder Studio",
+    subtitle: "Creative Agency Website",
+    description: "A modern, visually striking landing page built for a creative studio with smooth animations and a clean typography system.",
+    tags: ["React", "Vite", "Tailwind"],
+    link: "https://github.com/teddyhabtamu/dunder-studio",
+    live: "https://dunder-studio.vercel.app",
+    image: "/images/dunder.png"
+  },
+  {
+    id: 10,
+    title: "Laguz Logistics",
+    subtitle: "Logistics & Shipping Services",
+    description: "A premium logistics and shipping company website with SEO-optimized pages for services like air freight, inland haulage, and customs clearance.",
+    tags: ["React", "Vite", "Tailwind", "SEO"],
+    link: "https://github.com/teddyhabtamu/Laguz",
+    live: "https://laguz-sand.vercel.app",
+    image: "/images/laguz.png"
+  },
+  {
     id: 3,
     title: "Nike Branding",
     subtitle: "E-commerce Concept",
@@ -33,6 +73,16 @@ const projects: Project[] = [
     link: "https://github.com/teddyhabtamu/Nike-Shoes",
     live: "https://nike-shoes-steel.vercel.app/",
     image: "/images/nike.png"
+  },
+  {
+    id: 6,
+    title: "Kiya Gym",
+    subtitle: "Premium Fitness Website",
+    description: "A premium fitness center website featuring modern design, amenity showcasing, and location details for a gym in Addis Ababa.",
+    tags: ["React", "Tailwind", "Vite", "Frontend"],
+    link: "https://github.com/teddyhabtamu/Kiya-Gym",
+    live: "https://kiya-gym.vercel.app",
+    image: "/images/kiya-gym.png"
   },
   {
     id: 4,
@@ -53,20 +103,16 @@ const projects: Project[] = [
     link: "https://github.com/teddyhabtamu/PeakPulse-Fitness-Tracker-",
     live: "https://peak-pulse-fitness-tracker-kb1c.vercel.app/",
     image: "/images/fit.png"
-  },
-  {
-    id: 6,
-    title: "Meme Generator",
-    subtitle: "Interactive App",
-    description: "A fun web app that allows users to create and share custom memes by uploading images and adding text overlays.",
-    tags: ["React", "CSS"],
-    link: "https://github.com/teddyhabtamu/Meme-Generator-Web-App",
-    live: "https://meme-generator-web-app-phi.vercel.app/",
-    image: "/images/meme.png"
   }
 ];
 
 const tagColors: Record<string, string> = {
+  Backend: "bg-slate-500/10 text-slate-500 border-slate-500/20",
+  Telebirr: "bg-sky-500/10 text-sky-500 border-sky-500/20",
+  "Next.js": "dark:bg-white/10 dark:text-gray-200 dark:border-white/20 bg-black/10 text-gray-800 border-black/20",
+  Vite: "bg-purple-500/10 text-purple-500 border-purple-500/20",
+  AI: "bg-indigo-500/10 text-indigo-500 border-indigo-500/20",
+  SEO: "bg-rose-500/10 text-rose-500 border-rose-500/20",
   React: "bg-cyan-500/10 text-cyan-500 border-cyan-500/20",
   Tailwind: "bg-teal-500/10 text-teal-500 border-teal-500/20",
   "Node.js": "bg-green-500/10 text-green-500 border-green-500/20",
