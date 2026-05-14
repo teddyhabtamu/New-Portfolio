@@ -67,7 +67,7 @@ const Skills: React.FC = () => {
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.04, duration: 0.5, ease: "easeOut" }}
                                 whileHover={{ y: -4, scale: 1.03 }}
-                                className="group relative p-4 rounded-2xl dark:bg-white/4 bg-white dark:border-white/8 border-black/8 border flex flex-col items-center justify-center text-center gap-3 hover:border-orange-500/30 transition-all duration-300 cursor-default overflow-hidden shadow-sm dark:shadow-none"
+                                className="group relative p-4 rounded-2xl dark:bg-white/5 bg-white dark:border-white/10 border-black/10 border flex flex-col items-center justify-center text-center gap-3 hover:border-orange-500/30 transition-all duration-300 cursor-default overflow-hidden shadow-sm dark:shadow-none"
                             >
                                 {/* Subtle glow on hover */}
                                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-orange-500/5 to-transparent" />
