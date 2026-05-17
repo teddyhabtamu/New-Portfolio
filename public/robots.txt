@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.tewodroshabtamu.dev/
+
+# Sitemaps
+Sitemap: https://www.tewodroshabtamu.dev/sitemap.xml
