@@ -1,126 +1,110 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Magnetic from './Magnetic';
 import { useTheme } from './ThemeContext';
 
-interface NavbarProps {
-  setBlurActive: (value: boolean) => void;
-}
+const navItems = [
+  { name: 'about', href: '#about', n: '01' },
+  { name: 'work', href: '#work', n: '02' },
+  { name: 'words', href: '#testimonials', n: '03' },
+  { name: 'contact', href: '#contact', n: '04' },
+];
 
-const Navbar: React.FC<NavbarProps> = ({ setBlurActive }) => {
+const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-    };
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleToggle = () => {
-    const newState = !isOpen;
-    setIsOpen(newState);
-    setBlurActive(newState);
-  };
-
-  const navItems = [
-    { name: 'About', href: '#about' },
-    { name: 'Work', href: '#work' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'Contact', href: '#contact' },
-  ];
-
   return (
-    <nav className={`fixed top-0 w-full z-50 px-4 md:px-12 pointer-events-none transition-all duration-500`}>
-      <div className={`max-w-7xl mx-auto mt-4 flex justify-between items-center px-4 sm:px-6 py-3 rounded-2xl transition-all duration-500 pointer-events-auto
-        ${scrolled
-          ? 'dark:bg-black/70 bg-white/80 backdrop-blur-xl dark:border-white/8 border-black/10 border shadow-2xl'
-          : 'bg-transparent'
+    <>
+      <header
+        className={`fixed top-0 w-full z-50 transition-colors duration-300 ${
+          scrolled
+            ? 'bg-paper/90 dark:bg-ink/90 backdrop-blur-sm border-b border-line dark:border-line-dark'
+            : 'bg-transparent border-b border-transparent'
         }`}
       >
-        {/* Logo */}
-        <Magnetic className="pointer-events-auto">
-          <a href="#" className="cursor-pointer relative z-10 group">
-            <img
-              src="/images/text.svg"
-              alt="Tewodros"
-              className="h-4 sm:h-5 md:h-6 w-auto brightness-0 dark:invert invert-0 group-hover:opacity-80 transition-opacity"
-            />
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+          {/* Logo */}
+          <a href="#" className="text-sm font-display font-semibold uppercase tracking-[0.2em]">
+            Tewodros<span className="opacity-40">[.]</span>
           </a>
-        </Magnetic>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex gap-1 pointer-events-auto">
-          {navItems.map((item) => (
-            <Magnetic key={item.name}>
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
               <a
+                key={item.name}
                 href={item.href}
-                className="relative px-4 py-2 text-sm font-medium dark:text-gray-300 text-gray-600 dark:hover:text-white hover:text-gray-900 transition-colors duration-200 rounded-xl group"
+                className="group flex items-center gap-1.5 text-sm text-ink/70 dark:text-paper/70 hover:text-ink dark:hover:text-paper transition-colors"
               >
-                {item.name}
-                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-[2px] rounded-full bg-orange-500 group-hover:w-4/5 transition-all duration-300" />
+                <span className="font-mono text-[10px] opacity-50">{item.n}</span>
+                <span className="border-b border-transparent group-hover:border-current transition-colors">
+                  {item.name}
+                </span>
               </a>
-            </Magnetic>
-          ))}
-        </div>
+            ))}
+          </nav>
 
-        {/* CTA + Theme Toggle + Mobile toggle */}
-        <div className="flex items-center gap-2 sm:gap-3 pointer-events-auto">
-          {/* Theme Toggle Button */}
-          <motion.button
-            onClick={toggleTheme}
-            whileTap={{ scale: 0.9 }}
-            className="w-10 h-10 flex items-center justify-center rounded-xl dark:bg-white/5 bg-black/5 dark:border-white/10 border-black/10 border dark:text-gray-300 text-gray-600 dark:hover:bg-white/10 hover:bg-black/10 transition-colors"
-            aria-label="Toggle theme"
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              {theme === 'dark' ? (
-                <motion.span
-                  key="sun"
-                  initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
-                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                  exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Sun size={18} />
-                </motion.span>
-              ) : (
-                <motion.span
-                  key="moon"
-                  initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
-                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                  exit={{ opacity: 0, rotate: -90, scale: 0.5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Moon size={18} />
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </motion.button>
-
-          <a
-            href="#contact"
-            className="hidden md:inline-flex items-center px-5 py-2 rounded-full bg-orange-500 text-white text-sm font-semibold hover:bg-orange-600 hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all duration-300"
-          >
-            Hire Me
-          </a>
-          <div className="md:hidden">
+          <div className="flex items-center gap-3">
+            {/* Theme toggle */}
             <button
-              onClick={handleToggle}
-              className="w-10 h-10 flex items-center justify-center rounded-xl dark:bg-white/5 bg-black/5 dark:border-white/10 border-black/10 border dark:text-white text-gray-800 dark:hover:bg-white/10 hover:bg-black/10 transition-colors"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="w-9 h-9 flex items-center justify-center text-ink/70 dark:text-paper/70 hover:text-ink dark:hover:text-paper transition-colors"
             >
-              {!isOpen ? <Menu size={20} /> : null}
+              <AnimatePresence mode="wait" initial={false}>
+                {theme === 'dark' ? (
+                  <motion.span
+                    key="sun"
+                    initial={{ opacity: 0, rotate: -90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: 90 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    <Sun size={17} strokeWidth={1.5} />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="moon"
+                    initial={{ opacity: 0, rotate: 90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: -90 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    <Moon size={17} strokeWidth={1.5} />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
+
+            <a
+              href="#contact"
+              className="hidden md:inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.1em] bg-ink text-paper dark:bg-paper dark:text-ink px-5 py-2 hover:opacity-80 transition-opacity"
+            >
+              hire me <ArrowUpRight size={14} />
+            </a>
+
+            {/* Mobile toggle */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Menu"
+              className="md:hidden w-9 h-9 flex items-center justify-center text-ink/70 dark:text-paper/70"
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -128,44 +112,38 @@ const Navbar: React.FC<NavbarProps> = ({ setBlurActive }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 dark:bg-black/95 bg-white/95 backdrop-blur-2xl z-40 flex flex-col items-center justify-center md:hidden pointer-events-auto"
+            className="fixed inset-0 z-40 bg-paper dark:bg-ink flex flex-col justify-between p-8 md:hidden"
           >
-            <button
-              onClick={handleToggle}
-              className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-xl dark:bg-white/10 bg-black/10 dark:text-white text-gray-800"
-            >
-              <X size={20} />
-            </button>
-
-            <div className="flex flex-col text-center gap-6">
+            <div className="flex flex-col gap-2 mt-20">
               {navItems.map((item, i) => (
                 <motion.a
                   key={item.name}
                   href={item.href}
-                  onClick={handleToggle}
-                  initial={{ opacity: 0, y: 20 }}
+                  onClick={() => setIsOpen(false)}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.07 }}
-                  className="text-4xl font-display font-bold dark:text-white/80 text-gray-800 dark:hover:text-orange-400 hover:text-orange-500 transition-colors"
+                  transition={{ delay: 0.05 * i }}
+                  className="py-4 text-4xl font-display font-medium lowercase border-b border-line dark:border-line-dark flex items-center justify-between"
                 >
-                  {item.name}
+                  <span>{item.name}</span>
+                  <span className="font-mono text-sm opacity-40">{item.n}</span>
                 </motion.a>
               ))}
-              <motion.a
-                href="#contact"
-                onClick={handleToggle}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navItems.length * 0.07 }}
-                className="mt-4 inline-flex justify-center items-center px-8 py-3 rounded-full bg-orange-500 text-white text-lg font-semibold"
-              >
-                Hire Me
-              </motion.a>
             </div>
+            <motion.a
+              href="#contact"
+              onClick={() => setIsOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.25 }}
+              className="inline-flex items-center justify-center gap-2 text-lg font-medium bg-ink text-paper dark:bg-paper dark:text-ink py-4 hover:opacity-80 transition-opacity"
+            >
+              hire me <ArrowUpRight size={16} />
+            </motion.a>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, MapPin, Phone, Linkedin, Github, Twitter } from 'lucide-react';
+import { Send, Mail, MapPin, Phone, Linkedin, Github, Twitter, ArrowUpRight } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
@@ -40,65 +40,155 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="dark:bg-[#111111] bg-white dark:text-white text-gray-900 py-28 px-6 md:px-12 relative overflow-hidden dark:border-white/5 border-black/5 border-t transition-colors duration-300">
-      {/* Ambient glow */}
-      <div className="absolute bottom-0 right-0 w-[600px] h-[400px] bg-orange-500/5 blur-[120px] pointer-events-none" />
+    <section
+      id="contact"
+      className="relative bg-paper-deep dark:bg-ink-soft text-ink dark:text-paper px-6 md:px-10 py-24 md:py-36 border-t border-line dark:border-line-dark"
+    >
+      <div className="max-w-[1400px] mx-auto">
+        {/* Massive CTA line */}
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-15%" }}
+          transition={{ duration: 0.5, ease: [0.19, 1, 0.22, 1] }}
+          className="text-[12vw] md:text-[9vw] lg:text-[7.5rem] font-display font-semibold lowercase leading-[0.92] tracking-[-0.02em] mb-12"
+        >
+          let's<br /><em className="font-light italic opacity-80">build together</em>
+        </motion.h2>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-15%" }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-base md:text-lg font-light italic opacity-70 leading-relaxed max-w-xl mb-16"
+        >
+          Have a project in mind, or just want to say hi? I'm always open to new ideas and collaborations.
+        </motion.p>
 
-        {/* Header */}
-        <div className="mb-16">
-          <p className="text-xs text-orange-400 uppercase tracking-[0.3em] font-medium mb-4">Get In Touch</p>
-          <h2 className="text-4xl md:text-6xl font-display font-bold dark:text-white text-gray-900">
-            Let's build something
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
-              great together
-            </span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-
-          {/* Left info panel */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Avatar */}
-            <div className="flex items-center gap-4 mb-8">
-              <div className="relative w-16 h-16 rounded-2xl overflow-hidden dark:border-white/10 border-black/10 border">
-                <img src="/images/profile.png" alt="Avatar" className="w-full h-full object-cover" />
+        {/* Direct contact line — inline details */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-15%" }}
+          transition={{ duration: 0.5, delay: 0.12 }}
+          className="border-t border-line dark:border-line-dark"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3">
+            <a href="mailto:tewodroshabtamu29@gmail.com" className="group flex items-center justify-between gap-3 py-5 pr-4 border-b md:border-b-0 md:border-r border-line dark:border-line-dark">
+              <div className="flex items-center gap-3">
+                <Mail size={15} className="opacity-40 shrink-0" />
+                <span className="text-sm group-hover:opacity-60 transition-opacity break-all">tewodroshabtamu29@gmail.com</span>
               </div>
-              <div>
-                <p className="dark:text-white text-gray-900 font-semibold">Tewodros Habtamu</p>
-                <p className="text-sm dark:text-gray-500 text-gray-500">Full Stack Developer</p>
+              <ArrowUpRight size={14} className="opacity-30 shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+            <a href="tel:+251948004309" className="group flex items-center justify-between gap-3 py-5 px-0 md:px-4 border-b md:border-b-0 md:border-r border-line dark:border-line-dark">
+              <div className="flex items-center gap-3">
+                <Phone size={15} className="opacity-40 shrink-0" />
+                <span className="text-sm group-hover:opacity-60 transition-opacity">+251 948 004 309</span>
+              </div>
+              <ArrowUpRight size={14} className="opacity-30 shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+            <div className="flex items-center justify-between gap-3 py-5 pl-0 md:pl-4">
+              <div className="flex items-center gap-3">
+                <MapPin size={15} className="opacity-40 shrink-0" />
+                <span className="text-sm opacity-70">Addis Ababa, Ethiopia</span>
               </div>
             </div>
+          </div>
+        </motion.div>
 
-            <p className="dark:text-gray-400 text-gray-600 text-base leading-relaxed">
-              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-            </p>
-
-            {/* Contact info */}
-            <div className="space-y-4 pt-2">
-              {[
-                { icon: Phone, label: '+251 948 004 309', href: 'tel:+251948004309' },
-                { icon: Mail, label: 'tewodroshabtamu29@gmail.com', href: 'mailto:tewodroshabtamu29@gmail.com' },
-                { icon: MapPin, label: 'Addis Ababa, Ethiopia', href: undefined },
-              ].map(({ icon: Icon, label, href }) => (
-                <div key={label} className="flex items-center gap-3 group">
-                  <div className="w-9 h-9 rounded-xl dark:bg-white/5 bg-black/5 dark:border-white/10 border-black/10 border flex items-center justify-center dark:text-gray-400 text-gray-500 group-hover:border-orange-500/30 group-hover:text-orange-400 transition-all duration-200 flex-shrink-0">
-                    <Icon size={16} />
-                  </div>
-                  {href ? (
-                    <a href={href} className="text-sm dark:text-gray-400 text-gray-600 dark:hover:text-white hover:text-gray-900 transition-colors">{label}</a>
-                  ) : (
-                    <span className="text-sm dark:text-gray-400 text-gray-600">{label}</span>
-                  )}
-                </div>
-              ))}
+        {/* Form — inline fields, no box */}
+        <motion.form
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-15%" }}
+          transition={{ duration: 0.5, ease: [0.19, 1, 0.22, 1], delay: 0.18 }}
+          onSubmit={handleSubmit}
+          className="mt-14 md:mt-16"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-8">
+            <div className="flex items-baseline gap-4 border-b border-line dark:border-line-dark">
+              <label htmlFor="fullName" className="font-mono text-xs opacity-40 shrink-0">
+                name /
+              </label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                required
+                placeholder="Your name"
+                value={formData.fullName}
+                onChange={handleChange}
+                className="w-full bg-transparent border-0 pb-3 py-3 text-lg focus:outline-none placeholder:opacity-30"
+              />
             </div>
+            <div className="flex items-baseline gap-4 border-b border-line dark:border-line-dark">
+              <label htmlFor="email" className="font-mono text-xs opacity-40 shrink-0">
+                email /
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="you@email.com"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full bg-transparent border-0 pb-3 py-3 text-lg focus:outline-none placeholder:opacity-30"
+              />
+            </div>
+          </div>
+
+          <div className="flex items-baseline gap-4 border-b border-line dark:border-line-dark mt-8">
+            <label htmlFor="message" className="font-mono text-xs opacity-40 shrink-0">
+              message /
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows={4}
+              required
+              placeholder="Tell me about your project..."
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full bg-transparent border-0 pb-3 py-3 text-lg focus:outline-none placeholder:opacity-30 resize-none"
+            />
+          </div>
+
+          {alert && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className={`text-sm font-medium mt-6 ${alert.type === 'success'
+                ? 'text-[#22C55E]'
+                : 'text-[#EF4444]'
+                }`}
+            >
+              {alert.message}
+            </motion.p>
+          )}
+
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-6">
+            <button
+              type="submit"
+              disabled={loading}
+              className="group inline-flex items-center gap-2 text-base font-medium uppercase tracking-[0.1em] bg-ink text-paper dark:bg-paper dark:text-ink px-8 py-3.5 hover:opacity-80 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              {loading ? (
+                <>
+                  <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                  sending
+                </>
+              ) : (
+                <>
+                  send message <Send size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                </>
+              )}
+            </button>
 
             {/* Socials */}
-            <div className="flex gap-3 pt-2">
+            <div className="flex gap-4">
               {socials.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -106,105 +196,15 @@ const Contact: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-10 h-10 rounded-full dark:border-white/10 border-black/10 border flex items-center justify-center dark:text-gray-400 text-gray-500 hover:border-orange-500/50 hover:text-orange-400 hover:bg-orange-500/8 transition-all duration-200"
+                  className="flex items-center gap-2 text-sm opacity-50 hover:opacity-100 transition-opacity"
                 >
-                  <Icon size={16} />
+                  <Icon size={16} strokeWidth={1.5} />
+                  {label}
                 </a>
               ))}
             </div>
           </div>
-
-          {/* Form */}
-          <div className="lg:col-span-3">
-            <div className="dark:bg-white/3 bg-black/2 rounded-3xl dark:border-white/8 border-black/8 border p-8 md:p-10">
-              <form onSubmit={handleSubmit} className="space-y-6">
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label htmlFor="fullName" className="text-xs font-medium dark:text-gray-400 text-gray-500 uppercase tracking-wider">
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      id="fullName"
-                      name="fullName"
-                      required
-                      placeholder="John Doe"
-                      value={formData.fullName}
-                      onChange={handleChange}
-                      className="w-full dark:bg-white/5 bg-black/3 dark:border-white/10 border-black/10 border rounded-xl px-4 py-3 dark:text-white text-gray-900 text-sm dark:placeholder:text-gray-600 placeholder:text-gray-400 focus:outline-none focus:border-orange-500/60 dark:focus:bg-orange-500/5 focus:bg-orange-500/5 transition-all duration-200"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-xs font-medium dark:text-gray-400 text-gray-500 uppercase tracking-wider">
-                      Your Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      placeholder="john@email.com"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full dark:bg-white/5 bg-black/3 dark:border-white/10 border-black/10 border rounded-xl px-4 py-3 dark:text-white text-gray-900 text-sm dark:placeholder:text-gray-600 placeholder:text-gray-400 focus:outline-none focus:border-orange-500/60 dark:focus:bg-orange-500/5 focus:bg-orange-500/5 transition-all duration-200"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-xs font-medium dark:text-gray-400 text-gray-500 uppercase tracking-wider">
-                    Your Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    required
-                    placeholder="Tell me about your project..."
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full dark:bg-white/5 bg-black/3 dark:border-white/10 border-black/10 border rounded-xl px-4 py-3 dark:text-white text-gray-900 text-sm dark:placeholder:text-gray-600 placeholder:text-gray-400 focus:outline-none focus:border-orange-500/60 dark:focus:bg-orange-500/5 focus:bg-orange-500/5 transition-all duration-200 resize-none"
-                  />
-                </div>
-
-                {alert && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`px-4 py-3 rounded-xl text-sm font-medium ${alert.type === 'success'
-                      ? 'bg-green-500/10 border border-green-500/30 text-green-500'
-                      : 'bg-red-500/10 border border-red-500/30 text-red-500'
-                      }`}
-                  >
-                    {alert.message}
-                  </motion.div>
-                )}
-
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.98 }}
-                  disabled={loading}
-                  className="w-full flex items-center justify-center gap-2 bg-orange-500 text-white py-4 rounded-xl font-semibold text-sm hover:bg-orange-600 hover:shadow-[0_0_30px_rgba(249,115,22,0.3)] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {loading ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      Send Message <Send size={15} />
-                    </>
-                  )}
-                </motion.button>
-
-              </form>
-            </div>
-          </div>
-
-        </div>
+        </motion.form>
       </div>
     </section>
   );

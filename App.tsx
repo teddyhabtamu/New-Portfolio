@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import CustomCursor from './components/CustomCursor';
@@ -13,15 +13,11 @@ const Testimonials = lazy(() => import('./components/Testimonials'));
 const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 
-// Fallback skeleton or blank space for lazy loaded sections
-const SectionFallback = () => <div className="min-h-[50vh] bg-[#080808] dark:bg-[#080808]" />;
-
 const AppInner: React.FC = () => {
   useEffect(() => {
-    // Initialize Smooth Scroll with custom options
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Standard easeOutExpo
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
@@ -43,23 +39,19 @@ const AppInner: React.FC = () => {
     };
   }, []);
 
-  const [blurActive, setBlurActive] = useState(false);
-
   return (
-    <main className="bg-[#F5F5F0] dark:bg-[#080808] min-h-screen w-full cursor-none selection:bg-orange-500/30 selection:text-orange-100 transition-colors duration-300">
+    <main className="bg-paper dark:bg-ink min-h-screen w-full cursor-none transition-colors duration-300">
       <CustomCursor />
-      <Navbar setBlurActive={setBlurActive} />
-      <div className={blurActive ? "blur-xl transition-all duration-300" : "transition-all duration-300"}>
-        <Hero />
-        <Suspense fallback={<SectionFallback />}>
-          <About />
-          <Skills />
-          <Projects />
-          <Testimonials />
-          <Contact />
-          <Footer />
-        </Suspense>
-      </div>
+      <Navbar />
+      <Hero />
+      <Suspense fallback={null}>
+        <About />
+        <Skills />
+        <Projects />
+        <Testimonials />
+        <Contact />
+        <Footer />
+      </Suspense>
     </main>
   );
 };

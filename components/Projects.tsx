@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Github, ExternalLink } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { Project } from '../types';
+import { fade, rise, VIEW } from './motion';
 
 const projects: Project[] = [
   {
@@ -15,6 +16,26 @@ const projects: Project[] = [
     image: "/images/smartStudy.png"
   },
   {
+    id: 2,
+    title: "Brainwave",
+    subtitle: "AI Landing Page",
+    description: "Interactive user interfaces for an AI SaaS product, built with React.js.",
+    tags: ["React", "Tailwind"],
+    link: "https://github.com/teddyhabtamu/Brainwave",
+    live: "https://brainwave-six-gamma.vercel.app/",
+    image: "/images/brain.png"
+  },
+  {
+    id: 1,
+    title: "Altech Valve Management",
+    subtitle: "Enterprise Web App",
+    description: "Responsive UI screens and improved user experience built with React and Tailwind.",
+    tags: ["React", "Tailwind", "Frontend"],
+    link: "https://github.com/amplitudeventures/avms-frontend",
+    live: "http://16.16.143.17/login",
+    image: "/images/altech.png"
+  },
+  {
     id: 8,
     title: "Agar Ride",
     subtitle: "Ride-Sharing Commute App",
@@ -25,30 +46,10 @@ const projects: Project[] = [
     image: "/images/agar.png"
   },
   {
-    id: 1,
-    title: "Altech Valve Management System",
-    subtitle: "Enterprise Web App",
-    description: "A front-end project where I worked on building responsive UI screens and improving the overall user experience using React and Tailwind.",
-    tags: ["React", "Tailwind", "Frontend"],
-    link: "https://github.com/amplitudeventures/avms-frontend",
-    live: "http://16.16.143.17/login",
-    image: "/images/altech.png"
-  },
-  {
-    id: 2,
-    title: "Brainwave",
-    subtitle: "AI Landing Page",
-    description: "A front-end project where I contributed to building interactive user interfaces using React.js for an AI SaaS product.",
-    tags: ["React", "Tailwind"],
-    link: "https://github.com/teddyhabtamu/Brainwave",
-    live: "https://brainwave-six-gamma.vercel.app/",
-    image: "/images/brain.png"
-  },
-  {
     id: 9,
     title: "Dunder Studio",
     subtitle: "Creative Agency Website",
-    description: "A modern, visually striking landing page built for a creative studio with smooth animations and a clean typography system.",
+    description: "A modern landing page for a creative studio with smooth animations and clean typography.",
     tags: ["React", "Vite", "Tailwind"],
     link: "https://github.com/teddyhabtamu/dunder-studio",
     live: "https://dunder-studio.vercel.app",
@@ -57,8 +58,8 @@ const projects: Project[] = [
   {
     id: 10,
     title: "Laguz Logistics",
-    subtitle: "Logistics & Shipping Services",
-    description: "A premium logistics and shipping company website with SEO-optimized pages for services like air freight, inland haulage, and customs clearance.",
+    subtitle: "Logistics & Shipping",
+    description: "A premium logistics company website with SEO-optimized service pages.",
     tags: ["React", "Vite", "Tailwind", "SEO"],
     link: "https://github.com/teddyhabtamu/Laguz",
     live: "https://laguz-sand.vercel.app",
@@ -68,7 +69,7 @@ const projects: Project[] = [
     id: 3,
     title: "Nike Branding",
     subtitle: "E-commerce Concept",
-    description: "A branding project for Nike, focusing on creating a visually compelling and responsive website design with smooth animations.",
+    description: "A visually compelling and responsive website design with smooth animations.",
     tags: ["React", "Tailwind", "JavaScript"],
     link: "https://github.com/teddyhabtamu/Nike-Shoes",
     live: "https://nike-shoes-steel.vercel.app/",
@@ -77,8 +78,8 @@ const projects: Project[] = [
   {
     id: 6,
     title: "Kiya Gym",
-    subtitle: "Premium Fitness Website",
-    description: "A premium fitness center website featuring modern design, amenity showcasing, and location details for a gym in Addis Ababa.",
+    subtitle: "Fitness Website",
+    description: "A premium fitness center website with modern design and amenity showcasing.",
     tags: ["React", "Tailwind", "Vite", "Frontend"],
     link: "https://github.com/teddyhabtamu/Kiya-Gym",
     live: "https://kiya-gym.vercel.app",
@@ -88,7 +89,7 @@ const projects: Project[] = [
     id: 4,
     title: "Fana Digital Library",
     subtitle: "Archive System",
-    description: "Developed and deployed a digital library system for Fana Broadcasting Corporation, digitizing 100+ books.",
+    description: "A digital library system for Fana Broadcasting Corporation, digitizing 100+ books.",
     tags: ["React", "Node.js", "MongoDB", "Express"],
     link: "https://github.com/teddyhabtamu/Fana-Digital-Library",
     live: "https://fana-digital-library-ojng.vercel.app/",
@@ -98,7 +99,7 @@ const projects: Project[] = [
     id: 5,
     title: "PeakPulse Fitness",
     subtitle: "Health Tracker",
-    description: "A fitness tracking app allowing users to log workouts, track progress, and set personal health goals with analytics.",
+    description: "A fitness tracking app to log workouts, track progress, and set health goals.",
     tags: ["React", "Redux", "Tailwind", "SQL"],
     link: "https://github.com/teddyhabtamu/PeakPulse-Fitness-Tracker-",
     live: "https://peak-pulse-fitness-tracker-kb1c.vercel.app/",
@@ -106,148 +107,156 @@ const projects: Project[] = [
   }
 ];
 
-const tagColors: Record<string, string> = {
-  Backend: "bg-slate-500/10 text-slate-500 border-slate-500/20",
-  Telebirr: "bg-sky-500/10 text-sky-500 border-sky-500/20",
-  "Next.js": "dark:bg-white/10 dark:text-gray-200 dark:border-white/20 bg-black/10 text-gray-800 border-black/20",
-  Vite: "bg-purple-500/10 text-purple-500 border-purple-500/20",
-  AI: "bg-indigo-500/10 text-indigo-500 border-indigo-500/20",
-  SEO: "bg-rose-500/10 text-rose-500 border-rose-500/20",
-  React: "bg-cyan-500/10 text-cyan-500 border-cyan-500/20",
-  Tailwind: "bg-teal-500/10 text-teal-500 border-teal-500/20",
-  "Node.js": "bg-green-500/10 text-green-500 border-green-500/20",
-  MongoDB: "bg-emerald-500/10 text-emerald-500 border-emerald-500/20",
-  Express: "bg-gray-500/10 text-gray-500 border-gray-500/20",
-  JavaScript: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20",
-  Redux: "bg-purple-500/10 text-purple-500 border-purple-500/20",
-  SQL: "bg-blue-500/10 text-blue-500 border-blue-500/20",
-  Frontend: "bg-orange-500/10 text-orange-500 border-orange-500/20",
-  CSS: "bg-pink-500/10 text-pink-500 border-pink-500/20",
-};
-
-const getTagColor = (tag: string) =>
-  tagColors[tag] || "dark:bg-white/5 bg-black/5 text-gray-500 dark:border-white/10 border-black/10";
-
 const Projects: React.FC = () => {
   const [showAll, setShowAll] = useState(false);
   const LIMIT = 4;
   const displayed = showAll ? projects : projects.slice(0, LIMIT);
 
   return (
-    <section id="work" className="dark:bg-[#111111] bg-white dark:text-white text-gray-900 py-28 px-6 md:px-12 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto">
-
+    <section
+      id="work"
+      className="bg-paper-deep dark:bg-ink-soft text-ink dark:text-paper px-6 md:px-10 py-24 md:py-32 border-t border-line dark:border-line-dark"
+    >
+      <div className="max-w-[1400px] mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-          <div>
-            <p className="text-xs text-orange-400 uppercase tracking-[0.3em] font-medium mb-4">Portfolio</p>
-            <h2 className="text-4xl md:text-5xl font-display font-bold dark:text-white text-gray-900">Selected Work</h2>
-          </div>
-          <p className="dark:text-gray-500 text-gray-500 text-sm max-w-xs">
-            A collection of my best projects spanning web apps, landing pages, and full-stack systems.
-          </p>
+        <div className="flex items-center gap-4 mb-10">
+          <span className="font-mono text-sm">[03]</span>
+          <span className="h-px flex-1 bg-line dark:bg-line-dark" />
+          <span className="font-mono text-xs uppercase tracking-[0.2em] opacity-50">portolio</span>
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <motion.h2
+            variants={rise()}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEW}
+            className="text-4xl md:text-6xl font-display font-semibold lowercase tracking-[-0.02em]"
+          >
+            selected work
+          </motion.h2>
+          <motion.p
+            variants={fade(0.1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEW}
+            className="text-sm opacity-50 max-w-xs leading-relaxed md:text-right"
+          >
+            A few highlights — web apps, landing pages, and systems shipped in the last few years.
+          </motion.p>
+        </div>
+
+        {/* Featured first project */}
+        {displayed.length > 0 && (
+          <motion.a
+            key={'feat' + displayed[0].id}
+            href={displayed[0].live || displayed[0].link}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEW}
+            transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
+            className="group block relative mb-16 md:mb-24"
+          >
+            <span
+              aria-hidden
+              className="pointer-events-none select-none block font-display font-semibold text-7xl md:text-8xl leading-none text-ink/15 dark:text-paper/15 mb-2"
+            >
+              01
+            </span>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+              <div className="md:col-span-7 overflow-hidden relative">
+                <img
+                  src={displayed[0].image}
+                  alt={displayed[0].title}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full aspect-[16/10] object-cover grayscale group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                />
+              </div>
+              <div className="md:col-span-5">
+                <p className="font-mono text-xs uppercase tracking-[0.2em] opacity-50 mb-3">
+                  {displayed[0].subtitle}
+                </p>
+                <h3 className="text-3xl md:text-4xl font-display font-semibold lowercase leading-tight mb-4">
+                  {displayed[0].title}
+                </h3>
+                <p className="text-base opacity-70 leading-relaxed mb-5 max-w-md">
+                  {displayed[0].description}
+                </p>
+                <div className="flex flex-wrap gap-x-3 gap-y-1 mb-6">
+                  {displayed[0].tags.map(tag => (
+                    <span key={tag} className="text-xs uppercase tracking-wider opacity-40">{tag}</span>
+                  ))}
+                </div>
+                <span className="inline-flex items-center gap-1.5 text-sm font-medium uppercase tracking-[0.1em] border border-ink/20 dark:border-ink-soft/30 px-5 py-2.5 group-hover:bg-ink group-hover:text-paper dark:group-hover:bg-paper dark:group-hover:text-ink transition-colors">
+                  view case <ArrowUpRight size={14} />
+                </span>
+              </div>
+            </div>
+          </motion.a>
+        )}
+
+        {/* Remaining projects — 2-col grid with big indices */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-14 gap-y-20">
           <AnimatePresence>
-            {displayed.map((project) => (
-              <motion.div
+            {displayed.slice(1).map((project, i) => (
+              <motion.a
                 key={project.id}
-                initial={{ opacity: 0, y: 30 }}
+                href={project.live || project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.5 }}
-                className="group relative rounded-3xl dark:border-white/8 border-black/8 border overflow-hidden dark:bg-white/3 bg-black/2 hover:border-orange-500/25 transition-all duration-500"
+                viewport={VIEW}
+                transition={{ duration: 0.5, ease: [0.19, 1, 0.22, 1], delay: i * 0.05 }}
+                className={`group block ${i === displayed.slice(1).length - 1 && displayed.slice(1).length % 2 === 1 ? 'lg:col-span-2' : ''}`}
               >
-                {/* Image */}
-                <div className="relative w-full h-52 overflow-hidden">
+                <span
+                  aria-hidden
+                  className="pointer-events-none select-none block font-display font-semibold text-7xl md:text-8xl leading-none text-ink/15 dark:text-paper/15 mb-2"
+                >
+                  {String(i + 2).padStart(2, '0')}
+                </span>
+                <div className="overflow-hidden mb-4">
                   <img
                     src={project.image}
                     alt={project.title}
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full aspect-[16/10] object-cover grayscale group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
                   />
-                  <div className="absolute inset-0 dark:bg-gradient-to-t dark:from-[#111111] from-white/80 via-black/10 to-transparent" />
-
-                  {/* Action buttons on hover */}
-                  <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
-                    {project.live && (
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-9 h-9 flex items-center justify-center rounded-full bg-black/60 backdrop-blur-sm border border-white/20 text-white hover:bg-orange-500 hover:border-orange-500 transition-all duration-200"
-                      >
-                        <ExternalLink size={14} />
-                      </a>
-                    )}
-                    {project.link && (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-9 h-9 flex items-center justify-center rounded-full bg-black/60 backdrop-blur-sm border border-white/20 text-white hover:bg-orange-500 hover:border-orange-500 transition-all duration-200"
-                      >
-                        <Github size={14} />
-                      </a>
-                    )}
-                  </div>
                 </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <div className="flex items-start justify-between gap-3 mb-3">
-                    <div>
-                      <p className="text-xs dark:text-gray-500 text-gray-400 uppercase tracking-widest mb-1">{project.subtitle}</p>
-                      <h3 className="text-xl font-display font-bold dark:text-white text-gray-900 group-hover:text-orange-500 transition-colors">
-                        {project.title}
-                      </h3>
-                    </div>
-                    {project.live && (
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full dark:border-white/10 border-black/10 border dark:text-gray-400 text-gray-500 hover:border-orange-500 hover:text-orange-400 transition-all group/btn"
-                      >
-                        <ArrowUpRight size={16} className="group-hover/btn:rotate-45 transition-transform duration-200" />
-                      </a>
-                    )}
-                  </div>
-                  <p className="text-sm dark:text-gray-400 text-gray-500 leading-relaxed mb-4">{project.description}</p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.tags.map(tag => (
-                      <span
-                        key={tag}
-                        className={`text-[11px] font-medium px-2.5 py-1 rounded-full border ${getTagColor(tag)}`}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                <div className="flex items-baseline justify-between gap-4 mb-2">
+                  <h3 className="text-2xl font-display font-medium lowercase leading-tight group-hover:underline underline-offset-4">
+                    {project.title}
+                  </h3>
+                  <ArrowUpRight size={16} className="opacity-40 shrink-0" />
                 </div>
-              </motion.div>
+                <p className="text-xs uppercase tracking-[0.15em] opacity-40 mb-3">{project.subtitle}</p>
+                <div className="flex flex-wrap gap-x-3 gap-y-1">
+                  {project.tags.slice(0, 4).map(tag => (
+                    <span key={tag} className="text-[11px] uppercase tracking-wider opacity-40">{tag}</span>
+                  ))}
+                </div>
+              </motion.a>
             ))}
           </AnimatePresence>
         </div>
 
         {/* Show more */}
         {projects.length > LIMIT && (
-          <div className="mt-12 flex justify-center">
+          <div className="mt-24 flex justify-center">
             <button
               onClick={() => setShowAll(!showAll)}
-              className="group flex items-center gap-2 px-8 py-4 rounded-full dark:border-white/15 border-black/15 border dark:text-gray-300 text-gray-600 text-sm font-semibold hover:border-orange-500/50 dark:hover:text-white hover:text-gray-900 hover:bg-orange-500/8 transition-all duration-300"
+              className="group inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.1em] hover:opacity-60 transition-opacity"
             >
-              {showAll ? 'Show Less' : 'View More Projects'}
-              <ArrowUpRight size={15} className={`transition-transform duration-300 ${showAll ? 'rotate-180' : 'group-hover:rotate-45'}`} />
+              {showAll ? 'show less' : 'view all projects'}
+              <ArrowUpRight size={14} className={`transition-transform ${showAll ? 'rotate-180' : 'group-hover:translate-x-0.5 group-hover:-translate-y-0.5'}`} />
             </button>
           </div>
         )}
-
       </div>
     </section>
   );

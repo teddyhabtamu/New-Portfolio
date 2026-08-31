@@ -1,199 +1,119 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown, Sparkles } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { fade, rise } from './motion';
+
+const resumeLink =
+  "https://drive.google.com/uc?export=download&id=1u4SipPMfeJb215xjMps6x54R5FioCLum";
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
 
 const Hero: React.FC = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.85, 1], [1, 1, 0]);
-
-  const resumeLink =
-    "https://drive.google.com/uc?export=download&id=1u4SipPMfeJb215xjMps6x54R5FioCLum";
-
-  const stats = [
-    { value: "3+", label: "Years Experience" },
-    { value: "15+", label: "Projects Done" },
-    { value: "10+", label: "Happy Clients" },
-  ];
-
   return (
-    <section
-      ref={ref}
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden dark:bg-[#080808] bg-[#F5F5F0] dark:text-white text-gray-900 pt-20 pb-32 md:pb-10 transition-colors duration-300"
+    <motion.section
+      initial="hidden"
+      animate="show"
+      variants={container}
+      className="relative min-h-screen flex flex-col justify-between bg-paper dark:bg-ink text-ink dark:text-paper px-6 md:px-10 pt-28 pb-10"
     >
-      {/* Layered ambient background */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Radial glow top center */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] dark:bg-orange-500/8 bg-orange-500/12 blur-[130px] rounded-full" />
-        {/* Subtle left glow */}
-        <div className="absolute top-1/3 -left-20 w-[500px] h-[500px] dark:bg-orange-600/5 bg-orange-600/8 blur-[100px] rounded-full" />
-        {/* Grid overlay */}
-        <div
-          className="absolute inset-0 dark:opacity-[0.03] opacity-[0.06]"
-          style={{
-            backgroundImage: 'linear-gradient(rgba(0,0,0,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.5) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }}
-        />
-      </div>
-
-      <motion.div
-        style={{ y, opacity }}
-        className="relative z-10 max-w-7xl w-full px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center py-12"
-      >
-        {/* LEFT: Text Content */}
-        <div className="order-2 lg:order-1 flex flex-col gap-6">
-
-          {/* Tag line */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 w-fit"
-          >
-            <Sparkles size={13} className="text-orange-400" />
-            <span className="text-xs font-medium text-orange-400 tracking-widest uppercase">Available for work</span>
-          </motion.div>
-
-          {/* Name + Title */}
-          <motion.div
-            initial={{ opacity: 0, y: 35 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
-          >
-            <p className="dark:text-gray-400 text-gray-500 text-lg font-display font-medium mb-3">
-              Hi, I'm Tewodros Habtamu
-            </p>
-            <h1 className="font-display font-bold leading-[1.05] tracking-tight dark:text-white text-gray-900">
-              <span className="text-5xl md:text-6xl lg:text-7xl block">Web Developer</span>
-              <span className="text-5xl md:text-6xl lg:text-7xl block mt-1">
-                &{" "}
-                <span className="relative inline-block">
-                  <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-red-500">
-                    Data Scientist
-                  </span>
-                </span>
-              </span>
-            </h1>
-          </motion.div>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.25 }}
-            className="dark:text-gray-400 text-gray-600 text-base md:text-lg leading-relaxed max-w-md font-sans"
-          >
-            I transform design concepts into fast, interactive web experiences that leave lasting impressions. Passionate about aesthetics, performance, and clean code.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.33 }}
-            className="flex flex-wrap gap-4 items-center pt-2"
-          >
-            <a
-              href="#work"
-              className="group relative inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-orange-500 text-white text-sm font-semibold overflow-hidden transition-all duration-300 hover:bg-orange-600 hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] hover:scale-[1.03]"
-            >
-              View My Work
-              <ArrowDown size={14} className="group-hover:translate-y-0.5 transition-transform" />
-            </a>
-            <a
-              href={resumeLink}
-              download="Tewodros_Resume.pdf"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full dark:border-white/15 border-black/15 border dark:text-white text-gray-800 text-sm font-semibold backdrop-blur-sm dark:hover:border-orange-500/60 hover:border-orange-500/60 dark:hover:bg-white/5 hover:bg-black/5 transition-all duration-300"
-            >
-              Download CV
-            </a>
-          </motion.div>
-
-          {/* Stats Row */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="flex items-center gap-8 pt-4 dark:border-white/8 border-black/10 border-t"
-          >
-            {stats.map((stat, i) => (
-              <div key={i} className="text-center">
-                <p className="text-2xl font-display font-bold dark:text-white text-gray-900">{stat.value}</p>
-                <p className="text-xs dark:text-gray-500 text-gray-500 mt-0.5">{stat.label}</p>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* RIGHT: Profile Image Card */}
+      {/* Availability line */}
+      <div className="max-w-[1400px] mx-auto w-full">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.15, ease: [0.76, 0, 0.24, 1] }}
-          className="order-1 lg:order-2 flex justify-center items-center"
+          variants={fade(0.05)}
+          className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] opacity-60 mb-8"
         >
-          <div className="relative w-full max-w-[380px] mx-auto">
-            {/* Glow ring behind card */}
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/20 to-transparent blur-2xl scale-110" />
+          <span className="w-2 h-2 bg-[#22C55E] inline-block" />
+          available for work — addis ababa, et
+        </motion.div>
 
-            {/* Main card */}
-            <div className="relative rounded-3xl overflow-hidden dark:border-white/10 border-black/10 border shadow-2xl aspect-[3/4]">
+        {/* Massive headline + portrait */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+          <h1 className="md:col-span-9 font-display font-semibold leading-[0.92] tracking-[-0.02em]">
+            <motion.span
+              variants={rise()}
+              className="block text-[13vw] md:text-[9vw] lg:text-[7.5rem]"
+            >
+              Tewodros
+            </motion.span>
+            <motion.span
+              variants={rise(0.08)}
+              className="block text-[13vw] md:text-[9vw] lg:text-[7.5rem] opacity-30"
+            >
+              Habtamu
+            </motion.span>
+          </h1>
+
+          {/* Portrait — substantial right column */}
+          <motion.div
+            variants={rise(0.16)}
+            className="md:col-span-3 flex justify-end items-end"
+          >
+            <div className="relative w-40 md:w-full max-w-[15rem] border border-line dark:border-line-dark">
               <img
                 src="/images/profile.png"
                 alt="Tewodros Habtamu"
                 fetchPriority="high"
-                decoding="sync"
-                className="w-full h-full object-cover"
+                className="w-full aspect-[4/5] object-cover grayscale contrast-125"
               />
-              {/* Gradient overlay at bottom */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <span className="absolute -bottom-2.5 left-0 right-0 h-px bg-ink/20 dark:bg-paper/20" />
+              <span className="absolute -top-2.5 -left-2.5 w-2.5 h-2.5 bg-ink dark:bg-paper" />
+              <span className="absolute -top-2.5 -right-2.5 w-2.5 h-2.5 bg-ink dark:bg-paper" />
             </div>
+          </motion.div>
+        </div>
 
-            {/* Floating status badge */}
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="absolute -bottom-5 left-6 flex items-center gap-3 dark:bg-[#1a1a1a]/90 bg-white/90 backdrop-blur-xl dark:border-white/10 border-black/10 border rounded-2xl px-4 py-3 shadow-xl"
-            >
-              <div className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-xs font-medium dark:text-gray-200 text-gray-700">Open to opportunities</span>
-            </motion.div>
-
-            {/* Floating tech badge */}
-            <motion.div
-              animate={{ y: [0, 6, 0] }}
-              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
-              className="absolute -top-4 -right-4 bg-orange-500 rounded-2xl px-4 py-2.5 shadow-xl"
-            >
-              <p className="text-xs font-bold text-white">React · Node · Python</p>
-            </motion.div>
-          </div>
-        </motion.div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 dark:text-gray-600 text-gray-400"
-      >
-        <span className="text-xs uppercase tracking-widest">Scroll</span>
+        {/* Role + blurb row */}
         <motion.div
-          animate={{ y: [0, 5, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
+          variants={fade(0.24)}
+          className="grid grid-cols-1 md:grid-cols-12 gap-6 items-end mt-10"
         >
-          <ArrowDown size={14} />
+          <p className="md:col-span-3 text-sm uppercase tracking-[0.2em] opacity-60 leading-relaxed">
+            Web Developer<br />&amp; <em className="not-italic opacity-70">Data Scientist</em>
+          </p>
+          <p className="md:col-span-5 md:col-start-5 text-base md:text-lg leading-relaxed max-w-md opacity-70 italic">
+            I build fast, focused software for the web. Clean systems, honest interfaces, work that ships.
+          </p>
         </motion.div>
+      </div>
+
+      {/* Bottom row: stats + CTAs */}
+      <motion.div
+        variants={fade(0.3)}
+        className="max-w-[1400px] mx-auto w-full border-t border-line dark:border-line-dark pt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+      >
+        <p className="font-mono text-xs md:text-sm opacity-70 leading-loose">
+          3+ yrs experience · 15+ projects · 10+ clients
+        </p>
+        <div className="flex flex-wrap items-center gap-4">
+          <a
+            href="#work"
+            className="group inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.1em]"
+          >
+            view work
+            <ArrowDown size={14} className="group-hover:translate-y-0.5 transition-transform" />
+          </a>
+          <a
+            href={resumeLink}
+            download="Tewodros_Resume.pdf"
+            className="group inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.1em]"
+          >
+            cv
+            <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.1em] bg-transparent border border-ink/20 dark:border-ink-soft/30 px-5 py-2.5 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink transition-colors"
+          >
+            start a project <ArrowUpRight size={14} />
+          </a>
+        </div>
       </motion.div>
-    </section>
+    </motion.section>
   );
 };
 
 export default Hero;
+

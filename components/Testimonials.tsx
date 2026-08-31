@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Testimonial } from '../types';
+import { rise, fade, VIEW } from './motion';
 
 const testimonials: Testimonial[] = [
   {
@@ -12,7 +12,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 2,
-    quote: "His work on the PeakPulse Fitness Tracker was top-notch. The app was intuitive, responsive, and delivered exactly what we needed. Tewodros is reliable and talented.",
+    quote: "His work on the PeakPulse Fitness Tracker was top-notch. The app was intuitive, responsive, and delivered exactly what we needed.",
     author: "Haile Melekot",
     role: "Product Advisor & Lecturer, AAiT"
   },
@@ -32,122 +32,94 @@ const testimonials: Testimonial[] = [
 
 const Testimonials: React.FC = () => {
   const [active, setActive] = useState(0);
-  const total = testimonials.length;
-
-  const prev = () => setActive((a) => (a - 1 + total) % total);
-  const next = () => setActive((a) => (a + 1) % total);
-
   const item = testimonials[active];
 
   return (
-    <section id="testimonials" className="dark:bg-[#080808] bg-[#F5F5F0] dark:text-white text-gray-900 py-28 px-6 md:px-12 overflow-hidden dark:border-white/5 border-black/5 border-t transition-colors duration-300">
-      <div className="max-w-7xl mx-auto">
-
+    <section
+      id="testimonials"
+      className="bg-paper dark:bg-ink text-ink dark:text-paper px-6 md:px-10 py-24 md:py-32 border-t border-line dark:border-line-dark"
+    >
+      <div className="max-w-[1400px] mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-          <div>
-            <p className="text-xs text-orange-400 uppercase tracking-[0.3em] font-medium mb-4">Social Proof</p>
-            <h2 className="text-4xl md:text-5xl font-display font-bold dark:text-white text-gray-900">What Clients Say</h2>
-          </div>
-          {/* Navigation */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={prev}
-              className="w-11 h-11 rounded-full dark:border-white/10 border-black/10 border flex items-center justify-center dark:text-gray-400 text-gray-500 hover:border-orange-500/50 hover:text-orange-400 transition-all duration-200"
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <span className="text-sm dark:text-gray-500 text-gray-400 font-mono">
-              {String(active + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
-            </span>
-            <button
-              onClick={next}
-              className="w-11 h-11 rounded-full dark:border-white/10 border-black/10 border flex items-center justify-center dark:text-gray-400 text-gray-500 hover:border-orange-500/50 hover:text-orange-400 transition-all duration-200"
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
+        <div className="flex items-center gap-4 mb-16">
+          <span className="font-mono text-sm">[04]</span>
+          <span className="h-px flex-1 bg-line dark:bg-line-dark" />
+          <span className="font-mono text-xs uppercase tracking-[0.2em] opacity-50">words</span>
         </div>
 
-        {/* Featured testimonial */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -24 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="relative rounded-3xl dark:border-white/8 border-black/8 border dark:bg-white/3 bg-black/2 p-10 md:p-14 mb-6"
-          >
-            {/* Glow */}
-            <div className="absolute top-0 left-1/4 w-1/2 h-1 bg-gradient-to-r from-transparent via-orange-500/40 to-transparent rounded-full" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
+          {/* Featured — sticky quote */}
+          <div className="md:sticky md:top-28 md:self-start">
+            <motion.h2
+              variants={rise()}
+              initial="hidden"
+              whileInView="show"
+              viewport={VIEW}
+              className="text-4xl md:text-6xl font-display font-semibold lowercase tracking-[-0.02em] mb-10"
+            >
+              good<br /><em className="font-light italic opacity-80">words</em>
+            </motion.h2>
 
-            <div className="flex flex-col md:flex-row gap-10 items-start">
-              <div className="flex-1">
-                {/* Stars */}
-                <div className="flex gap-1 mb-6">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} className="fill-orange-400 text-orange-400" />
-                  ))}
-                </div>
-
-                {/* Quote */}
-                <Quote size={36} className="text-orange-500/30 mb-4" />
-                <p className="text-xl md:text-2xl dark:text-gray-200 text-gray-700 leading-relaxed font-light italic mb-8">
-                  "{item.quote}"
+            <AnimatePresence mode="wait">
+              <motion.blockquote
+                key={active}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.3 }}
+                className="relative"
+              >
+                <span
+                  aria-hidden
+                  className="absolute -top-10 -left-4 font-display font-semibold text-[7rem] leading-none opacity-10 select-none"
+                >
+                  "
+                </span>
+                <p className="text-2xl md:text-3xl font-display font-light italic leading-relaxed mb-8">
+                  {item.quote}
                 </p>
+                <footer>
+                  <p className="font-display font-medium text-lg">{item.author}</p>
+                  <p className="text-sm opacity-50 mt-0.5">{item.role}</p>
+                </footer>
+              </motion.blockquote>
+            </AnimatePresence>
 
-                {/* Author */}
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-lg font-bold text-white shadow-lg">
-                    {item.author.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="font-semibold dark:text-white text-gray-900 text-base">{item.author}</p>
-                    <p className="text-sm dark:text-gray-500 text-gray-500">{item.role}</p>
-                  </div>
-                </div>
-              </div>
+            {/* Selector */}
+            <div className="flex gap-2 mt-10">
+              {testimonials.map((t, i) => (
+                <button
+                  key={t.id}
+                  onClick={() => setActive(i)}
+                  aria-label={`Quote ${i + 1}`}
+                  className={`h-1 transition-all duration-300 ${i === active ? 'w-10 bg-ink dark:bg-paper' : 'w-4 bg-line dark:bg-line-dark hover:bg-ink/40 dark:hover:bg-paper/40'}`}
+                />
+              ))}
             </div>
-          </motion.div>
-        </AnimatePresence>
+          </div>
 
-        {/* Dot indicators */}
-        <div className="flex justify-center gap-2 mt-4">
-          {testimonials.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActive(i)}
-              className={`transition-all duration-300 rounded-full ${i === active ? 'w-6 h-2 bg-orange-500' : 'w-2 h-2 dark:bg-white/20 bg-black/20 dark:hover:bg-white/40 hover:bg-black/40'}`}
-            />
-          ))}
+          {/* Remaining quotes — compact list */}
+          <div className="border-t border-line dark:border-line-dark">
+            {testimonials
+              .filter((_, i) => i !== active)
+              .concat([item])
+              .map((t, i) => (
+                <motion.div
+                  key={t.id}
+                  variants={fade(i * 0.05)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={VIEW}
+                  className="py-6 border-b border-line dark:border-line-dark"
+                >
+                  <p className="text-sm leading-relaxed opacity-70 mb-3">"{t.quote}"</p>
+                  <p className="text-xs font-medium uppercase tracking-[0.1em] opacity-60">
+                    {t.author} <span className="opacity-40">— {t.role.split(',')[0]}</span>
+                  </p>
+                </motion.div>
+              ))}
+          </div>
         </div>
-
-        {/* Grid of all testimonials (smaller, below) */}
-        <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
-          {testimonials.map((t, i) => (
-            <button
-              key={t.id}
-              onClick={() => setActive(i)}
-              className={`text-left p-5 rounded-2xl border transition-all duration-300 ${i === active
-                ? 'border-orange-500/40 bg-orange-500/5'
-                : 'dark:border-white/6 border-black/6 dark:bg-white/2 bg-black/2 dark:hover:border-white/15 hover:border-black/15'
-                }`}
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-sm font-bold text-white">
-                  {t.author.charAt(0)}
-                </div>
-                <div>
-                  <p className="text-sm font-semibold dark:text-white text-gray-900 leading-tight">{t.author}</p>
-                  <p className="text-[11px] dark:text-gray-500 text-gray-500">{t.role.split(',')[0]}</p>
-                </div>
-              </div>
-              <p className="text-xs dark:text-gray-400 text-gray-500 line-clamp-2 leading-relaxed">"{t.quote}"</p>
-            </button>
-          ))}
-        </div>
-
       </div>
     </section>
   );

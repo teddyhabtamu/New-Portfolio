@@ -1,102 +1,116 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
+import { fade, rise, VIEW } from './motion';
 
 const stats = [
-  { value: "3+", label: "Years of Experience" },
-  { value: "15+", label: "Projects Delivered" },
-  { value: "10+", label: "Satisfied Clients" },
-  { value: "5", label: "Open Source Repos" },
+  { value: "3+", label: "years experience" },
+  { value: "15+", label: "projects delivered" },
+  { value: "10+", label: "satisfied clients" },
+  { value: "5", label: "open source repos" },
 ];
 
 const About: React.FC = () => {
-
   return (
-    <section id="about" className="dark:bg-[#111111] bg-white text-current py-28 md:py-36 px-6 md:px-12 rounded-t-[2.5rem] z-20 relative dark:border-white/5 border-black/5 border-t transition-colors duration-300">
-      <div className="max-w-7xl mx-auto">
-        <div className="w-full">
-          {/* Section label */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.5 }}
-            className="text-xs text-orange-400 uppercase tracking-[0.3em] font-medium mb-5"
-          >
-            About Me
-          </motion.p>
+    <section
+      id="about"
+      className="relative bg-paper-deep dark:bg-ink-soft text-ink dark:text-paper px-6 md:px-10 py-24 md:py-36 border-t border-line dark:border-line-dark overflow-hidden"
+    >
+      {/* Decorative oversized wordmark */}
+      <span
+        aria-hidden
+        className="pointer-events-none select-none absolute -top-6 left-1/2 -translate-x-1/2 font-display font-semibold lowercase text-[26vw] md:text-[22vw] leading-none whitespace-nowrap opacity-[0.04]"
+      >
+        about
+      </span>
 
-          {/* Headline */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-6xl font-display font-bold leading-tight mb-14 max-w-4xl dark:text-white text-gray-900"
-          >
-            Turning ideas into{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
-              digital reality
-            </span>
-          </motion.h2>
+      <div className="max-w-[1400px] mx-auto relative">
+        {/* Number + small label */}
+        <motion.div
+          variants={fade()}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEW}
+          className="flex items-center gap-4 mb-10"
+        >
+          <span className="font-mono text-sm">[01]</span>
+          <span className="h-px flex-1 bg-line dark:bg-line-dark" />
+          <span className="font-mono text-xs uppercase tracking-[0.2em] opacity-50">profile</span>
+        </motion.div>
 
-          {/* Two-column intro */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-20 pb-16 dark:border-white/8 border-black/8 border-b">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl md:text-2xl dark:text-gray-300 text-gray-600 leading-relaxed font-light"
+        {/* Big statement + image, horizontal */}
+        <div className="grid grid-cols-12 gap-6 items-end mb-20">
+          <div className="col-span-12 lg:col-span-8">
+            <motion.h2
+              variants={rise()}
+              initial="hidden"
+              whileInView="show"
+              viewport={VIEW}
+              className="text-4xl md:text-6xl lg:text-7xl font-display font-semibold lowercase leading-[1.02] tracking-[-0.02em]"
             >
-              I'm a full-stack developer who loves building clean, fast, and intuitive web apps. I work with{" "}
-              <span className="text-orange-400 font-medium">React</span>,{" "}
-              <span className="text-orange-400 font-medium">Node.js</span>{" "}
-              and{" "}
-              <span className="text-orange-400 font-medium">Python</span>{" "}
-              to turn ideas into real products.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="space-y-6 dark:text-gray-400 text-gray-500 text-base leading-relaxed"
-            >
-              <p>
-                I enjoy solving complex problems with elegant solutions. Whether it's architecting a full-stack app or analysing a dataset, I bring the same energy and attention to detail.
-              </p>
-              <p>
-                Currently based in <span className="dark:text-white text-gray-900">Addis Ababa, Ethiopia</span>, I'm open to remote work and exciting collaborations worldwide.
-              </p>
-            </motion.div>
+              turning ideas<br />
+              into <em className="font-display font-light italic opacity-80">working</em> software
+            </motion.h2>
           </div>
-
-          {/* Stats grid */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6"
+            variants={rise(0.1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={VIEW}
+            className="col-span-8 col-start-3 lg:col-span-3 lg:col-start-10"
           >
-            {stats.map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 + i * 0.1, duration: 0.4 }}
-                className="group p-6 rounded-2xl dark:border-white/8 border-black/8 border dark:bg-white/3 bg-black/3 hover:border-orange-500/30 hover:bg-orange-500/5 transition-all duration-300"
-              >
-                <p className="text-4xl font-display font-bold dark:text-white text-gray-900 mb-1 group-hover:text-orange-400 transition-colors">
-                  {stat.value}
-                </p>
-                <p className="text-xs dark:text-gray-500 text-gray-500 uppercase tracking-wider">{stat.label}</p>
-              </motion.div>
-            ))}
+            <div className="border border-line dark:border-line-dark">
+              <img
+                src="/images/profile.png"
+                alt="Tewodros Habtamu"
+                loading="lazy"
+                className="w-full aspect-[4/5] object-cover grayscale contrast-125"
+              />
+            </div>
+            <p className="font-mono text-[11px] mt-2 opacity-40 uppercase tracking-[0.15em]">
+              addis ababa, et
+            </p>
           </motion.div>
+        </div>
 
+        {/* Stat strip — horizontal notches */}
+        <motion.div
+          variants={fade(0.15)}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEW}
+          className="grid grid-cols-2 md:grid-cols-4 border border-line dark:border-line-dark mb-16"
+        >
+          {stats.map((stat, i) => (
+            <div
+              key={stat.label}
+              className={`group relative p-6 md:p-8 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink transition-colors ${i % 2 === 1 ? 'border-l border-line dark:border-line-dark' : ''
+                } ${i > 1 ? 'border-t md:border-t-0 md:border-l border-line dark:border-line-dark' : ''}`}
+            >
+              <p className="text-5xl md:text-6xl font-display font-semibold mb-2">{stat.value}</p>
+              <p className="text-xs opacity-60 uppercase tracking-[0.15em]">{stat.label}</p>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Two-col narrative, wider left emphasis */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          <div className="md:col-span-7 md:col-start-1">
+            <p className="text-base md:text-lg leading-relaxed opacity-80 mb-6">
+              I enjoy solving complex problems with simple systems — whether architecting a full-stack application or digging into a dataset, the same attention to detail applies.
+            </p>
+            <p className="text-base md:text-lg leading-relaxed opacity-80">
+              Currently based in Addis Ababa, and open to remote work and collaborations worldwide.
+            </p>
+          </div>
+          <div className="md:col-span-4 md:col-start-9 flex items-start justify-end">
+            <a
+              href="#work"
+              className="group inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.1em] opacity-70 hover:opacity-100 transition-opacity"
+            >
+              the work <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+          </div>
         </div>
       </div>
     </section>

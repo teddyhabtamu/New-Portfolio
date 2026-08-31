@@ -1,6 +1,5 @@
 import React from 'react';
-import { Linkedin, Github, Twitter, ArrowUpRight } from 'lucide-react';
-import Magnetic from './Magnetic';
+import { Linkedin, Github, Twitter, ArrowUp } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -12,69 +11,75 @@ const Footer: React.FC = () => {
   ];
 
   const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Work', href: '#work' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'about', href: '#about' },
+    { name: 'work', href: '#work' },
+    { name: 'words', href: '#testimonials' },
+    { name: 'contact', href: '#contact' },
   ];
 
   return (
-    <footer className="dark:bg-[#080808] bg-[#F5F5F0] dark:text-white text-gray-900 pt-16 pb-10 px-6 md:px-12 dark:border-white/5 border-black/5 border-t transition-colors duration-300">
-      <div className="max-w-7xl mx-auto">
+    <footer className="relative bg-paper dark:bg-ink text-ink dark:text-paper px-6 md:px-10 pt-16 md:pt-24 pb-8 border-t border-line dark:border-line-dark overflow-hidden">
+      {/* Giant closing wordmark */}
+      <span
+        aria-hidden
+        className="pointer-events-none select-none absolute -top-2 left-1/2 -translate-x-1/2 font-display font-semibold lowercase text-[22vw] md:text-[16vw] leading-none whitespace-nowrap opacity-[0.05]"
+      >
+        Tewodros
+      </span>
 
-        {/* Top CTA section */}
-        <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-8 pb-12 dark:border-white/8 border-black/8 border-b mb-10">
-          <div className="text-center md:text-left">
-            <p className="text-xs text-orange-400 uppercase tracking-[0.3em] font-medium mb-3">Available for work</p>
-            <h2 className="text-5xl md:text-7xl font-display font-bold dark:text-white/10 text-black/10 tracking-tighter select-none">
-              Tewodros
-            </h2>
+      <div className="max-w-[1400px] mx-auto relative">
+        {/* Closing CTA */}
+        <p className="text-lg md:text-2xl font-light italic opacity-70 mb-14">
+          Thanks for stopping by — let's build something sharp.
+        </p>
+
+        {/* Bottom bar */}
+        <div className="border-t border-line dark:border-line-dark pt-6 flex flex-col md:flex-row items-center justify-between gap-6">
+          {/* Name + copyright */}
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <a href="#" className="text-sm font-display font-semibold uppercase tracking-[0.2em]">
+              Tewodros<span className="opacity-40">[.]</span>
+            </a>
+            <p className="font-mono text-xs opacity-40">
+              © {currentYear} — built with restraint
+            </p>
           </div>
 
-          <a
-            href="#contact"
-            className="group flex items-center gap-2 px-7 py-3.5 rounded-full bg-orange-500 text-white text-sm font-semibold hover:bg-orange-600 hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all duration-300"
-          >
-            Start a Project
-            <ArrowUpRight size={15} className="group-hover:rotate-45 transition-transform duration-200" />
-          </a>
-        </div>
-
-        {/* Bottom row */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-
-          {/* Logo + copyright */}
-          <div className="flex items-center gap-4">
-            <img src="/images/text.svg" alt="Logo" className="h-5 w-auto brightness-0 dark:invert opacity-40" />
-            <span className="dark:text-gray-600 text-gray-400 text-xs">© {currentYear} Tewodros Habtamu. All rights reserved.</span>
-          </div>
-
-          {/* Nav links */}
-          <div className="hidden md:flex items-center gap-6">
+          {/* Nav links — always visible */}
+          <nav className="flex items-center gap-6">
             {navLinks.map((l) => (
-              <a key={l.name} href={l.href} className="text-xs dark:text-gray-500 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors">
+              <a key={l.name} href={l.href} className="text-sm opacity-60 hover:opacity-100 transition-opacity lowercase">
                 {l.name}
               </a>
             ))}
-          </div>
+          </nav>
 
-          {/* Social icons */}
-          <div className="flex gap-3">
-            {socials.map(({ name, icon: Icon, link }) => (
-              <Magnetic key={name}>
+          <div className="flex items-center gap-4">
+            {/* Socials */}
+            <div className="flex gap-4">
+              {socials.map(({ name, icon: Icon, link }) => (
                 <a
+                  key={name}
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={name}
-                  className="w-9 h-9 rounded-full dark:border-white/10 border-black/10 border flex items-center justify-center dark:text-gray-500 text-gray-500 hover:border-orange-500/50 hover:text-orange-400 transition-all duration-200"
+                  className="opacity-60 hover:opacity-100 transition-opacity"
                 >
-                  <Icon size={15} strokeWidth={1.8} />
+                  <Icon size={17} strokeWidth={1.5} />
                 </a>
-              </Magnetic>
-            ))}
-          </div>
+              ))}
+            </div>
 
+            {/* Back to top */}
+            <a
+              href="#"
+              aria-label="Back to top"
+              className="flex items-center gap-2 text-sm opacity-50 hover:opacity-100 transition-opacity border-l border-line dark:border-line-dark pl-4"
+            >
+              top <ArrowUp size={13} strokeWidth={1.5} />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

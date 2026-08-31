@@ -1,18 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Inter:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* GLOBAL FONT */
-body {
-  @apply font-display;
-}
-
-/* Force display font to use Exo 2 */
-.font-display {
-  font-family: 'Exo 2', sans-serif !important;
-}
 
 /* Lenis Recommended CSS */
 html.lenis, html.lenis body {
@@ -35,47 +23,59 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
-/* Dark mode base (default) */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base theme */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   min-height: 100%;
-  background-color: #0C0C0C;
-  color: #EDEDED;
   overflow-x: hidden;
   overflow-y: auto;
+  background-color: #0A0A0A;
+  color: #EDEDED;
+  font-family: 'Inter', system-ui, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Light mode overrides */
 html:not(.dark), html:not(.dark) body {
-  background-color: #F5F5F0;
-  color: #111111;
+  background-color: #FAFAFA;
+  color: #0A0A0A;
 }
 
-/* Custom Scrollbar */
+/* Selection: hard bar, no soft glow */
+::selection {
+  background: #0A0A0A;
+  color: #FAFAFA;
+}
+
+html:not(.dark) ::selection {
+  background: #0A0A0A;
+  color: #FAFAFA;
+}
+
+/* Custom Scrollbar — thin, sharp edges */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0C0C0C;
+  background: #0A0A0A;
 }
 
 html:not(.dark) ::-webkit-scrollbar-track {
-  background: #F0F0EA;
+  background: #FAFAFA;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #333;
-  border-radius: 5px;
-  border: 2px solid #0C0C0C;
 }
 
 html:not(.dark) ::-webkit-scrollbar-thumb {
-  background: #C0C0B8;
-  border-color: #F0F0EA;
+  background: #BBB;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -83,5 +83,17 @@ html:not(.dark) ::-webkit-scrollbar-thumb {
 }
 
 html:not(.dark) ::-webkit-scrollbar-thumb:hover {
-  background: #999990;
+  background: #999;
+}
+
+/* Brutalist link style: sharp underline */
+.raw-link {
+  position: relative;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  transition: opacity 0.2s ease;
+}
+
+.raw-link:hover {
+  opacity: 0.55;
 }
